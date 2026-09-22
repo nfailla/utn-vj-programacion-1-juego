@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D playerRigidbody2d;
-    private const float MovementSpeed = 700f;
+    private const float MovementSpeed = 10f;
+    private float horizontal;
 
     void Awake()
     {
@@ -13,10 +14,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        Vector2 finalForce = MovementSpeed * Time.deltaTime * horizontal * new Vector2(1, 0);
-        Debug.Log("final force:" + finalForce);
+        horizontal = Input.GetAxisRaw("Horizontal");
+    }
 
-        playerRigidbody2d.AddForce(finalForce);
+    private void FixedUpdate()
+    {
+        playerRigidbody2d.linearVelocityX = MovementSpeed * horizontal;
     }
 }
