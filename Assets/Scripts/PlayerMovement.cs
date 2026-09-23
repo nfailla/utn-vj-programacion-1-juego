@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D playerRigidbody2d;
-    private const float MovementSpeed = 10f;
+    private const float MovementSpeed = 10f; // TODO: unhardcode
     private float horizontal;
 
     void Awake()
@@ -14,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        horizontal = Input.GetAxisRaw("Horizontal"); // TODO: unhardcode
     }
 
     private void FixedUpdate()
