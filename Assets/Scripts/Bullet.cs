@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float speed = 10f; // TODO: unhardcode
+    private int damage = 25; // TODO: unhardcode
     
     // Max lifetime of the bullet if it doesn't get destroyed first by hitting something
     private float maxLifetime = 5f; // TODO: unhardcode
@@ -18,5 +19,17 @@ public class Bullet : MonoBehaviour
     {
         bulletRigidbody2D.linearVelocityX = speed;
         Destroy(gameObject, maxLifetime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Hit!");
+        // TODO: use a superclass of Enemy1 (Enemy?)
+        if (collision.gameObject.TryGetComponent(out Enemy1 enemy))
+        {
+            Debug.Log("Got component");
+            enemy.TakeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 }
