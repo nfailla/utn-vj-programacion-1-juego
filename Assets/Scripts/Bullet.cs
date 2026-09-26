@@ -10,6 +10,12 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody2D bulletRigidbody2D;
 
+    public static void Spawn(Bullet bulletPrefab, Vector3 position, Vector2 direction)
+    {
+        Bullet bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
+        bullet.Shoot(direction);
+    }
+
     private void Awake()
     {
         bulletRigidbody2D = GetComponent<Rigidbody2D>();
@@ -17,19 +23,22 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        bulletRigidbody2D.linearVelocityX = speed;
         Destroy(gameObject, maxLifetime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Hit!");
         // TODO: use a superclass of Enemy1 (Enemy?)
         if (collision.gameObject.TryGetComponent(out Enemy1 enemy))
         {
-            Debug.Log("Got component");
             enemy.TakeDamage(damage);
             Destroy(gameObject);
         }
+    }
+
+    private void Shoot(Vector2 direction)
+    {
+        // multiply the direction vector by the speed scalar
+        bulletRigidbody2D.linearVelocity = direction * speed;
     }
 }

@@ -12,11 +12,13 @@ public class PlayerGun : MonoBehaviour
     }
 
     // TODO: attach these fields programmatically during Awake
-    [SerializeField]
-    private Bullet bulletPrefab;
 
-    [SerializeField]
-    private Transform firePointRight;
+    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private Transform firePointRight;
+    [SerializeField] private Transform firePointUpRight;
+    [SerializeField] private Transform firePointUp;
+    [SerializeField] private Transform firePointUpLeft;
+    [SerializeField] private Transform firePointLeft;
 
     private int ClipSize = 8; // TODO: unhardcode
     private int clip;
@@ -35,18 +37,34 @@ public class PlayerGun : MonoBehaviour
 
     void Update()
     {
+        // TODO: unhardcode all these input keys
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartReloading();
             return;
         }
 
-        bool isFiringRight = Input.GetButton("FireRight"); // TODO: unhardcode
-        if (isFiringRight)
+        if (Input.GetKey(KeyCode.L))
         {
             Shoot(ShootDirection.Right);
         }
-        // TODO: the rest of the directions
+        else if (Input.GetKey(KeyCode.O))
+        {
+            Shoot(ShootDirection.UpRight);
+        }
+        else if (Input.GetKey(KeyCode.I))
+        {
+            Shoot(ShootDirection.Up);
+        }
+        else if (Input.GetKey(KeyCode.U))
+        {
+            Shoot(ShootDirection.UpLeft);
+        }
+        else if (Input.GetKey(KeyCode.J))
+        {
+            Shoot(ShootDirection.Left);
+        }
     }
 
     void Shoot(ShootDirection direction)
@@ -56,10 +74,25 @@ public class PlayerGun : MonoBehaviour
         // TODO: add the other directions
         Transform firePoint = direction switch {
             ShootDirection.Right => firePointRight,
-            _ => firePointRight
+            ShootDirection.UpRight => firePointUpRight,
+            ShootDirection.Up => firePointUp,
+            ShootDirection.UpLeft => firePointUpLeft,
+            ShootDirection.Left => firePointLeft,
+            _ => firePointRight, // TODO: it should actually do nothing in this case!
         };
 
-        Bullet bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        Vector2 bulletDirection = direction switch
+        {
+            ShootDirection.Right => Vector2.right,
+            ShootDirection.UpRight => Vector2.up + Vector2.right,
+            ShootDirection.Up => Vector2.up,
+            ShootDirection.UpLeft => Vector2.up + Vector2.left,
+            ShootDirection.Left => Vector2.left,
+            _ => Vector2.right, // TODO: it should actually do nothing in this case!
+        };
+
+        Bullet.Spawn(bulletPrefab, firePoint.position, bulletDirection);
+
         clip -= 1;
 
         if (clip < 1)
