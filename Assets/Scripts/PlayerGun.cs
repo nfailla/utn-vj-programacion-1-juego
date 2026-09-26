@@ -31,8 +31,6 @@ public class PlayerGun : MonoBehaviour
     private void Start()
     {
         clip = ClipSize;
-        //isReloading = false;
-        //isCoolingDown = false;
     }
 
     void Update()
@@ -44,7 +42,6 @@ public class PlayerGun : MonoBehaviour
         }
 
         bool isFiringRight = Input.GetButton("FireRight"); // TODO: unhardcode
-        // TODO: cooldown between bullets
         if (isFiringRight)
         {
             Shoot(ShootDirection.Right);
