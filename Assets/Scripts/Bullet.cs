@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float speed = 10f; // TODO: unhardcode
+    private float speed = 20f; // TODO: unhardcode
     private int damage = 25; // TODO: unhardcode
     
     // Max lifetime of the bullet if it doesn't get destroyed first by hitting something
-    private float maxLifetime = 5f; // TODO: unhardcode
+    private float maxLifetime = 3f; // TODO: unhardcode
 
     private Rigidbody2D bulletRigidbody2D;
 

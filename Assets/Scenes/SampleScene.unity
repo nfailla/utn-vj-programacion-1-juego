@@ -478,6 +478,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1596341445 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3463687709263455399, guid: ff1a5c999c2a123489e1268b99b01d90, type: 3}
+  m_PrefabInstance: {fileID: 9143866489129820194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1970677452
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +563,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2458169550530877474, guid: 163bb8da82a4c59488ed3f1c235f27ba, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1596341445}
     - target: {fileID: 7811746356443826370, guid: 163bb8da82a4c59488ed3f1c235f27ba, type: 3}
       propertyPath: m_Name
       value: Enemy1
