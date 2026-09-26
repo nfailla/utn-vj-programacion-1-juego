@@ -14,6 +14,18 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal"); // TODO: unhardcode
+        TestJump();
+    }
+
+    /*
+     * Just for testing purposes
+     */
+    private void TestJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerRigidbody2d.AddForceY(MovementSpeed * 50);
+        }
     }
 
     private void FixedUpdate()
