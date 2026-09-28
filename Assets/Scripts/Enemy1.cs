@@ -23,6 +23,8 @@ public class Enemy1 : MonoBehaviour
      */
     private void FollowPlayer()
     {
+        if (player == null) return;
+
         // the target position is the player's horizontal position.
         // We don't want the enemy to try to reach the player vertically by
         // this, so the vertical position is the current enemy's vertical

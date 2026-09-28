@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    enum LookDirection { Left, Right };
+
     Rigidbody2D playerRigidbody2d;
     private const float MovementSpeed = 10f; // TODO: unhardcode
     private float horizontal;
+
+    private LookDirection lastLookDirection = LookDirection.Right;
+    public GameObject sprite; // TODO: better attachment
 
     void Awake()
     {
@@ -14,6 +19,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal"); // TODO: unhardcode
+        
+        lastLookDirection = horizontal < 0
+            ? LookDirection.Left
+            : (horizontal > 0 ? LookDirection.Right : lastLookDirection);
+
+        // TODO: not a big fan of this code
+        sprite.TryGetComponent(out SpriteRenderer spriteRenderer);
+        spriteRenderer.flipX = lastLookDirection == LookDirection.Left;
+
         TestJump();
     }
 
