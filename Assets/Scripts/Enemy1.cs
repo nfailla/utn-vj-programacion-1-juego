@@ -6,7 +6,12 @@ public class Enemy1 : MonoBehaviour
 
     private int damage = 20;
 
-    public GameObject player; // TODO: make private and attach on Awake
+    private GameObject player; // TODO: make private and attach on Awake
+
+    private void Awake()
+    {
+        player = GameObject.Find("Player"); // TODO: this is too brittle. Change the way we find the player here
+    }
 
     private void Update()
     {
