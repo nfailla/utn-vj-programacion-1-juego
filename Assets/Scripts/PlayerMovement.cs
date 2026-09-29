@@ -5,28 +5,33 @@ public class PlayerMovement : MonoBehaviour
     enum LookDirection { Left, Right };
 
     Rigidbody2D playerRigidbody2d;
-    private const float MovementSpeed = 10f; // TODO: unhardcode
+    private const float MovementSpeed = 5f; // TODO: unhardcode
     private float horizontal;
 
     private LookDirection lastLookDirection = LookDirection.Right;
-    public GameObject sprite; // TODO: better attachment
+    //public GameObject sprite; // TODO: better attachment
+
+    private Animator animator;
 
     void Awake()
     {
         playerRigidbody2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal"); // TODO: unhardcode
-        
+
+        animator.SetBool("isRunning", horizontal != 0f); // TODO: unhardcode
+
         lastLookDirection = horizontal < 0
             ? LookDirection.Left
             : (horizontal > 0 ? LookDirection.Right : lastLookDirection);
 
         // TODO: not a big fan of this code
-        sprite.TryGetComponent(out SpriteRenderer spriteRenderer);
-        spriteRenderer.flipX = lastLookDirection == LookDirection.Left;
+        //sprite.TryGetComponent(out SpriteRenderer spriteRenderer);
+        //spriteRenderer.flipX = lastLookDirection == LookDirection.Left;
 
         TestJump();
     }
