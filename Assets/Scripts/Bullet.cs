@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject bulletParticlesPrefab;
 
     private Rigidbody2D bulletRigidbody2D;
+    private float knockbackMagnitude; // TODO: make parameterizable!
 
     public static void Spawn(Bullet bulletPrefab, Vector3 position, Vector2 direction)
     {
@@ -25,6 +26,7 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
+        knockbackMagnitude = 100;
         Destroy(gameObject, maxLifetime);
     }
 
@@ -33,7 +35,7 @@ public class Bullet : MonoBehaviour
         // TODO: use a superclass of Enemy1 (Enemy?)
         if (collision.gameObject.TryGetComponent(out Enemy1 enemy))
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage, bulletRigidbody2D.linearVelocity.normalized * knockbackMagnitude);
             Instantiate(bulletParticlesPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

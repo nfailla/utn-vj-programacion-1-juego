@@ -8,9 +8,12 @@ public class Enemy1 : MonoBehaviour
 
     private GameObject player; // TODO: make private and attach on Awake
 
+    private Rigidbody2D rigidBody2d;
+
     private void Awake()
     {
         player = GameObject.Find("Player"); // TODO: this is too brittle. Change the way we find the player here
+        rigidBody2d = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -41,7 +44,7 @@ public class Enemy1 : MonoBehaviour
          );
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, Vector2? knockback = null)
     {
         hitPoints -= amount;
         Debug.Log("enemy hp: " + hitPoints);
@@ -49,6 +52,7 @@ public class Enemy1 : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (knockback != null) rigidBody2d.AddForce(knockback.Value);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
