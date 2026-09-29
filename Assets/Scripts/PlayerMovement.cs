@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
 
     private LookDirection lastLookDirection = LookDirection.Right;
-    //public GameObject sprite; // TODO: better attachment
+    public SpriteRenderer spriteRenderer;
 
     private Animator animator;
 
@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -29,9 +30,7 @@ public class PlayerMovement : MonoBehaviour
             ? LookDirection.Left
             : (horizontal > 0 ? LookDirection.Right : lastLookDirection);
 
-        // TODO: not a big fan of this code
-        //sprite.TryGetComponent(out SpriteRenderer spriteRenderer);
-        //spriteRenderer.flipX = lastLookDirection == LookDirection.Left;
+        spriteRenderer.flipX = lastLookDirection == LookDirection.Left;
 
         TestJump();
     }
