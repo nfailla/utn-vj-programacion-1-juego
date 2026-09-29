@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     // Max lifetime of the bullet if it doesn't get destroyed first by hitting something
     private float maxLifetime = 3f; // TODO: unhardcode
 
+    [SerializeField] private GameObject bulletParticlesPrefab;
+
     private Rigidbody2D bulletRigidbody2D;
 
     public static void Spawn(Bullet bulletPrefab, Vector3 position, Vector2 direction)
@@ -32,6 +34,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Enemy1 enemy))
         {
             enemy.TakeDamage(damage);
+            Instantiate(bulletParticlesPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
