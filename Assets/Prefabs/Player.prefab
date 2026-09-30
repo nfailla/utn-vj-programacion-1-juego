@@ -42,11 +42,12 @@ GameObject:
   - component: {fileID: 1256155187204361987}
   - component: {fileID: 2081183313689387322}
   - component: {fileID: -3415593412594325411}
+  - component: {fileID: 7180353859751619666}
+  - component: {fileID: 8311670255190956534}
   - component: {fileID: 443415338033519586}
   - component: {fileID: 4691389532677828893}
   - component: {fileID: 1938011272269351443}
-  - component: {fileID: 7180353859751619666}
-  - component: {fileID: 8311670255190956534}
+  - component: {fileID: 4332814906092628798}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -72,6 +73,7 @@ Transform:
   - {fileID: 8152721646496747221}
   - {fileID: 3336419163997450867}
   - {fileID: 3060995775815550449}
+  - {fileID: 4301186491322882566}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2081183313689387322
@@ -147,49 +149,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &443415338033519586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3463687709263455399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6d1134167f448740917fef23c7902a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  spriteRenderer: {fileID: 0}
---- !u!114 &4691389532677828893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3463687709263455399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d687453a27c1c9145880d1121b59d5cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerGun
-  bulletPrefab: {fileID: -7918116676575726711, guid: d8d72130b953c24499414691d70df796, type: 3}
-  firePointRight: {fileID: 960762878663558451}
-  firePointUpRight: {fileID: 7601247514867290590}
-  firePointUp: {fileID: 8152721646496747221}
-  firePointUpLeft: {fileID: 3336419163997450867}
-  firePointLeft: {fileID: 3060995775815550449}
---- !u!114 &1938011272269351443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3463687709263455399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c994adb85f649dd47a12418ceebdc207, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!95 &7180353859751619666
 Animator:
   serializedVersion: 7
@@ -263,7 +222,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7815371044791450175, guid: d8047d8937a6fcf4e9df0b4e5fec55eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.39, y: 0.48}
@@ -271,6 +230,64 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &443415338033519586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463687709263455399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d1134167f448740917fef23c7902a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  groundDetector: {fileID: 4301186491322882566}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &4691389532677828893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463687709263455399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d687453a27c1c9145880d1121b59d5cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerGun
+  bulletPrefab: {fileID: -7918116676575726711, guid: d8d72130b953c24499414691d70df796, type: 3}
+  firePointRight: {fileID: 960762878663558451}
+  firePointUpRight: {fileID: 7601247514867290590}
+  firePointUp: {fileID: 8152721646496747221}
+  firePointUpLeft: {fileID: 3336419163997450867}
+  firePointLeft: {fileID: 3060995775815550449}
+--- !u!114 &1938011272269351443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463687709263455399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c994adb85f649dd47a12418ceebdc207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &4332814906092628798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463687709263455399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27475a0520b9c9d428c0e5095b9e2af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &3925855045726733181
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +314,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1256155187204361987}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6096255578137437762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4301186491322882566}
+  m_Layer: 0
+  m_Name: GroundDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4301186491322882566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096255578137437762}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.019, y: -0.222, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7b7ef7343c8d08a45880ebeff240d77f
+guid: 34e5cce8d0a4c394280f835ade11a0a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6360989817546381326
-    second: sprites-player_0
+      213: -2714429821775056976
+    second: player-jumping_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprites-player_0
+      name: player-jumping_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1536
-        height: 1024
+        x: 135
+        y: 1086
+        width: 37
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2f76541867939b7a0800000000000000
-      internalID: -6360989817546381326
+      spriteID: 0bfee517578645ad0800000000000000
+      internalID: -2714429821775056976
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      sprites-player_0: -6360989817546381326
+      player-jumping_0: -2714429821775056976
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
