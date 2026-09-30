@@ -2,9 +2,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public enum AimDirection
+    {
+        Straight,
+        StraightUp,
+        Up,
+        StraightDown,
+    }
+
+    public enum Direction { Left, Right }
+
     private const float GROUND_DETECTION_RADIUS = .10f; // TODO: unhardcode
     private const float MOVEMENT_SPEED = 5f; // TODO: unhardcode
-    private enum LookDirection { Left, Right };
 
     [SerializeField] private Transform groundDetector;
     [SerializeField] private LayerMask groundLayer;
@@ -12,13 +21,17 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D playerRigidbody2d;
     private SpriteRenderer spriteRenderer;
 
-    private float horizontal;
-    private LookDirection lastLookDirection = LookDirection.Right;
+    private float _horizontal;
+    private float _vertical;
     private bool _isAttemptingToJump;
     private bool _isGrounded;
 
     public bool IsRunning { get; private set; }
     public bool IsJumping { get; private set; }
+    public bool IsAimingUp { get; private set; }
+    public bool IsAimingDown { get; private set; }
+    public Direction FacingDirection { get; private set; }
+    public AimDirection AimingDirection { get; private set; }
 
     private void Awake()
     {
@@ -28,26 +41,34 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal"); // TODO: unhardcode
+        _horizontal = Input.GetAxisRaw("Horizontal"); // TODO: unhardcode
+        _vertical = Input.GetAxisRaw("Vertical"); // TODO: unhardcode
 
-        IsRunning = horizontal != 0f;
+        IsRunning = _horizontal != 0f;
+        IsAimingUp = _vertical > 0f;
+        IsAimingDown = _vertical < 0f;
 
-        // TODO: lastLookDirection handling (flipping the spriteRenderer)
-        // should be PlayerAnimation's responsibility
-        lastLookDirection = horizontal < 0
-            ? LookDirection.Left
-            : (horizontal > 0 ? LookDirection.Right : lastLookDirection);
-
-        spriteRenderer.flipX = lastLookDirection == LookDirection.Left;
+        bool shouldFlip = _horizontal < 0
+            || (_horizontal == 0 && spriteRenderer.flipX);
+        spriteRenderer.flipX = shouldFlip;
+        FacingDirection = shouldFlip ? Direction.Left : Direction.Right;
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
             _isAttemptingToJump = true;
         }
+
+        AimingDirection = _vertical switch
+        {
+            > 0f => IsRunning ? AimDirection.StraightUp : AimDirection.Up,
+            < 0f => AimDirection.StraightDown, // TODO: it should actually crouch if it's not running!!!!!
+            _ => AimDirection.Straight,
+        };
     }
+
     private void FixedUpdate()
     {
-        playerRigidbody2d.linearVelocityX = MOVEMENT_SPEED * horizontal;
+        playerRigidbody2d.linearVelocityX = MOVEMENT_SPEED * _horizontal;
 
         _isGrounded = Physics2D.OverlapCircle(
             groundDetector.position,
