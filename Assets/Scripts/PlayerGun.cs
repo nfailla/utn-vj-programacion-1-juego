@@ -49,8 +49,13 @@ public class PlayerGun : MonoBehaviour
 
     void Update()
     {
-        // TODO: unhardcode all these input keys
+        if (movement.IsJumping)
+        {
+            // Do nothing while jumping: no shooting, no reloading
+            return;
+        }
 
+        // TODO: unhardcode the input keys
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartReloading();
