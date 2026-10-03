@@ -89,32 +89,22 @@ public class PlayerGun : MonoBehaviour
     {
         if (IsReloading() || IsCoolingDown()) return;
 
-        Transform firePoint = direction switch {
-            ShootDirection.Right => firePointRight,
-            ShootDirection.UpRight => firePointUpRight,
-            ShootDirection.DownRight => firePointDownRight,
-            ShootDirection.Up => firePointUp,
-            ShootDirection.UpLeft => firePointUpLeft,
-            ShootDirection.DownLeft => firePointDownLeft,
-            ShootDirection.Left => firePointLeft,
-            ShootDirection.GroundRight => firePointGroundRight,
-            ShootDirection.GroundLeft => firePointGroundLeft,
-            _ => firePointRight, // TODO: it should actually do nothing in this case!
+        // TODO: in fact, probably each firePoint should know how to shoot to its direction
+        (Transform, Vector2) firePointAndDirection = direction switch {
+            ShootDirection.Right =>       (firePointRight, Vector2.right),
+            ShootDirection.UpRight =>     (firePointUpRight, Vector2.up + Vector2.right),
+            ShootDirection.DownRight =>   (firePointDownRight, Vector2.down + Vector2.right),
+            ShootDirection.Up =>          (firePointUp, Vector2.up),
+            ShootDirection.UpLeft =>      (firePointUpLeft, Vector2.up + Vector2.left),
+            ShootDirection.DownLeft =>    (firePointDownLeft, Vector2.down + Vector2.left),
+            ShootDirection.Left =>        (firePointLeft, Vector2.left),
+            ShootDirection.GroundRight => (firePointGroundRight, Vector2.right),
+            ShootDirection.GroundLeft =>  (firePointGroundLeft, Vector2.left),
+            _ => (firePointRight, Vector2.right), // TODO: it should actually do nothing in this case!
         };
 
-        Vector2 bulletDirection = direction switch
-        {
-            ShootDirection.Right => Vector2.right,
-            ShootDirection.UpRight => Vector2.up + Vector2.right,
-            ShootDirection.DownRight => Vector2.down + Vector2.right,
-            ShootDirection.Up => Vector2.up,
-            ShootDirection.UpLeft => Vector2.up + Vector2.left,
-            ShootDirection.DownLeft => Vector2.down + Vector2.left,
-            ShootDirection.Left => Vector2.left,
-            ShootDirection.GroundRight => Vector2.right,
-            ShootDirection.GroundLeft => Vector2.left,
-            _ => Vector2.right, // TODO: it should actually do nothing in this case!
-        };
+        Transform firePoint = firePointAndDirection.Item1;
+        Vector2 bulletDirection = firePointAndDirection.Item2;
 
         Bullet.Spawn(bulletPrefab, firePoint.position, bulletDirection);
 
