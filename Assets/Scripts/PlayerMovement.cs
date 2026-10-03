@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
         StraightUp,
         Up,
         StraightDown,
+        Ground,
     }
 
     public enum Direction { Left, Right }
@@ -61,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         AimingDirection = _vertical switch
         {
             > 0f => IsRunning ? AimDirection.StraightUp : AimDirection.Up,
-            < 0f => AimDirection.StraightDown, // TODO: it should actually crouch if it's not running!!!!!
+            < 0f => IsRunning ? AimDirection.StraightDown : AimDirection.Ground,
             _ => AimDirection.Straight,
         };
     }

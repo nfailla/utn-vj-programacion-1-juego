@@ -11,9 +11,9 @@ public class PlayerGun : MonoBehaviour
         Left,
         UpLeft,
         DownLeft,
+        GroundRight,
+        GroundLeft,
     }
-
-    // TODO: attach these fields programmatically during Awake
 
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform firePointRight;
@@ -23,6 +23,8 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private Transform firePointUpLeft;
     [SerializeField] private Transform firePointDownLeft;
     [SerializeField] private Transform firePointLeft;
+    [SerializeField] private Transform firePointGroundRight;
+    [SerializeField] private Transform firePointGroundLeft;
 
     private PlayerMovement movement;
 
@@ -70,36 +72,18 @@ public class PlayerGun : MonoBehaviour
                     movement.FacingDirection == PlayerMovement.Direction.Left ? ShootDirection.DownLeft : ShootDirection.DownRight,
                 PlayerMovement.AimDirection.Up =>
                     ShootDirection.Up,
+                PlayerMovement.AimDirection.Ground =>
+                    movement.FacingDirection == PlayerMovement.Direction.Left ? ShootDirection.GroundLeft : ShootDirection.GroundRight,
                 _ => ShootDirection.Right,
-                // TODO: crouching
             };
-            //Shoot(ShootDirection.Right);
             Shoot(shootDirection);
         }
-
-        //else if (Input.GetKey(KeyCode.O))
-        //{
-        //    Shoot(ShootDirection.UpRight);
-        //}
-        //else if (Input.GetKey(KeyCode.I))
-        //{
-        //    Shoot(ShootDirection.Up);
-        //}
-        //else if (Input.GetKey(KeyCode.U))
-        //{
-        //    Shoot(ShootDirection.UpLeft);
-        //}
-        //else if (Input.GetKey(KeyCode.J))
-        //{
-        //    Shoot(ShootDirection.Left);
-        //}
     }
 
     void Shoot(ShootDirection direction)
     {
         if (IsReloading() || IsCoolingDown()) return;
 
-        // TODO: add the other directions
         Transform firePoint = direction switch {
             ShootDirection.Right => firePointRight,
             ShootDirection.UpRight => firePointUpRight,
@@ -108,6 +92,8 @@ public class PlayerGun : MonoBehaviour
             ShootDirection.UpLeft => firePointUpLeft,
             ShootDirection.DownLeft => firePointDownLeft,
             ShootDirection.Left => firePointLeft,
+            ShootDirection.GroundRight => firePointGroundRight,
+            ShootDirection.GroundLeft => firePointGroundLeft,
             _ => firePointRight, // TODO: it should actually do nothing in this case!
         };
 
@@ -120,7 +106,8 @@ public class PlayerGun : MonoBehaviour
             ShootDirection.UpLeft => Vector2.up + Vector2.left,
             ShootDirection.DownLeft => Vector2.down + Vector2.left,
             ShootDirection.Left => Vector2.left,
-            // TODO: crouching
+            ShootDirection.GroundRight => Vector2.right,
+            ShootDirection.GroundLeft => Vector2.left,
             _ => Vector2.right, // TODO: it should actually do nothing in this case!
         };
 
