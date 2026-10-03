@@ -7,7 +7,8 @@ public class PlayerGun : MonoBehaviour
         Right,
         UpRight,
         DownRight,
-        Up,
+        UpFacingRight,
+        UpFacingLeft,
         Left,
         UpLeft,
         DownLeft,
@@ -19,7 +20,8 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private Transform firePointRight;
     [SerializeField] private Transform firePointUpRight;
     [SerializeField] private Transform firePointDownRight;
-    [SerializeField] private Transform firePointUp;
+    [SerializeField] private Transform firePointUpFacingRight;
+    [SerializeField] private Transform firePointUpFacingLeft;
     [SerializeField] private Transform firePointUpLeft;
     [SerializeField] private Transform firePointDownLeft;
     [SerializeField] private Transform firePointLeft;
@@ -76,7 +78,7 @@ public class PlayerGun : MonoBehaviour
                 PlayerMovement.AimDirection.StraightDown =>
                     movement.FacingDirection == PlayerMovement.Direction.Left ? ShootDirection.DownLeft : ShootDirection.DownRight,
                 PlayerMovement.AimDirection.Up =>
-                    ShootDirection.Up,
+                    movement.FacingDirection == PlayerMovement.Direction.Left ? ShootDirection.UpFacingLeft : ShootDirection.UpFacingRight,
                 PlayerMovement.AimDirection.Ground =>
                     movement.FacingDirection == PlayerMovement.Direction.Left ? ShootDirection.GroundLeft : ShootDirection.GroundRight,
                 _ => ShootDirection.Right,
@@ -91,15 +93,16 @@ public class PlayerGun : MonoBehaviour
 
         // TODO: in fact, probably each firePoint should know how to shoot to its direction
         (Transform, Vector2) firePointAndDirection = direction switch {
-            ShootDirection.Right =>       (firePointRight, Vector2.right),
-            ShootDirection.UpRight =>     (firePointUpRight, Vector2.up + Vector2.right),
-            ShootDirection.DownRight =>   (firePointDownRight, Vector2.down + Vector2.right),
-            ShootDirection.Up =>          (firePointUp, Vector2.up),
-            ShootDirection.UpLeft =>      (firePointUpLeft, Vector2.up + Vector2.left),
-            ShootDirection.DownLeft =>    (firePointDownLeft, Vector2.down + Vector2.left),
-            ShootDirection.Left =>        (firePointLeft, Vector2.left),
-            ShootDirection.GroundRight => (firePointGroundRight, Vector2.right),
-            ShootDirection.GroundLeft =>  (firePointGroundLeft, Vector2.left),
+            ShootDirection.Right =>         (firePointRight, Vector2.right),
+            ShootDirection.UpRight =>       (firePointUpRight, Vector2.up + Vector2.right),
+            ShootDirection.DownRight =>     (firePointDownRight, Vector2.down + Vector2.right),
+            ShootDirection.UpFacingRight => (firePointUpFacingRight, Vector2.up),
+            ShootDirection.UpFacingLeft =>  (firePointUpFacingLeft, Vector2.up),
+            ShootDirection.UpLeft =>        (firePointUpLeft, Vector2.up + Vector2.left),
+            ShootDirection.DownLeft =>      (firePointDownLeft, Vector2.down + Vector2.left),
+            ShootDirection.Left =>          (firePointLeft, Vector2.left),
+            ShootDirection.GroundRight =>   (firePointGroundRight, Vector2.right),
+            ShootDirection.GroundLeft =>    (firePointGroundLeft, Vector2.left),
             _ => (firePointRight, Vector2.right), // TODO: it should actually do nothing in this case!
         };
 
