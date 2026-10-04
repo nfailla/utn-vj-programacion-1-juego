@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy1 : MonoBehaviour
+public class RedMob : MonoBehaviour
 {
     private const string PLAYER_TAG = "Player"; // TODO: tag handle or whatever
     
