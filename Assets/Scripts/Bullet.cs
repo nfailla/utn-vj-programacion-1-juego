@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour
     // Max lifetime of the bullet if it doesn't get destroyed first by hitting something
     private float maxLifetime = 3f; // TODO: unhardcode; instead of controlling lifetime, make them disappear when going out of the screen
 
-    [SerializeField] private GameObject bulletParticlesPrefab;
     [SerializeField] private string _targetTag; // TODO: should probably be a list
 
     private Rigidbody2D bulletRigidbody2D;
@@ -45,7 +44,6 @@ public class Bullet : MonoBehaviour
         {
             Damageable damageable = collision.gameObject.GetComponent<Damageable>();
             damageable.TakeDamage(damage, bulletRigidbody2D.linearVelocity.normalized * _knockbackMagnitude);
-            //Instantiate(bulletParticlesPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
