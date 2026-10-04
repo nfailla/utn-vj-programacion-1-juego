@@ -20,6 +20,7 @@ public class Damageable : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        //if (knockback != null) rb.AddForce(knockback.Value, ForceMode2D.Impulse);
         if (knockback != null) rb.AddForce(knockback.Value);
     }
 }

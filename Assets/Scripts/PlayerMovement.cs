@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     private const float GROUND_DETECTION_RADIUS = .10f; // TODO: unhardcode
     private const float MOVEMENT_SPEED = 5f; // TODO: unhardcode
+    private const float KNOCKBACK_DURATION_SECONDS = 1f; // TODO: unhardcode
 
     [SerializeField] private Transform groundDetector;
     [SerializeField] private LayerMask groundLayer;
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private float _vertical;
     private bool _isAttemptingToJump;
     private bool _isGrounded;
+    private bool _isKnockedBack;
 
     public bool IsRunning { get; private set; }
     public bool IsJumping { get; private set; }
@@ -69,7 +71,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        playerRigidbody2d.linearVelocityX = MOVEMENT_SPEED * _horizontal;
+        if(!_isKnockedBack)
+        {
+            playerRigidbody2d.linearVelocityX = MOVEMENT_SPEED * _horizontal;
+        }
 
         _isGrounded = Physics2D.OverlapCircle(
             groundDetector.position,
@@ -86,4 +91,13 @@ public class PlayerMovement : MonoBehaviour
             playerRigidbody2d.AddForceY(MOVEMENT_SPEED * 50);
         }
     }
+
+    public void Knockback(Vector2 knockback)
+    {
+        _isKnockedBack = true;
+        playerRigidbody2d.AddForce(knockback, ForceMode2D.Impulse);
+        Invoke(nameof(EndKnockback), KNOCKBACK_DURATION_SECONDS);
+    }
+    private void EndKnockback() => _isKnockedBack = false;
+
 }

@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee532599f69e0b4e9eb35735dc42a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
+  damage: 20
+  knockbackMagnitude: 5
 --- !u!95 &4908243588594947586
 Animator:
   serializedVersion: 7

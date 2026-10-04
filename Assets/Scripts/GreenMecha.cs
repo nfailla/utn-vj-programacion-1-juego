@@ -7,7 +7,7 @@ public class GreenMecha : MonoBehaviour
     [SerializeField] private float shootIntervalSeconds = 2f;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private float knockbackMagnitude = 200;
+    [SerializeField] private float knockbackMagnitude = 200f;
     
     private Animator animator;
 
