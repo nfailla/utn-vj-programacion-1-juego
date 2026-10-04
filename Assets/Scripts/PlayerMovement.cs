@@ -19,6 +19,12 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Transform groundDetector;
     [SerializeField] private LayerMask groundLayer;
+    
+    private BoxCollider2D hitbox;
+    [SerializeField] private Vector2 standingHitboxSize;
+    [SerializeField] private Vector2 standingHitboxOffset;
+    [SerializeField] private Vector2 proneHitboxSize;
+    [SerializeField] private Vector2 proneHitboxOffset;
 
     private Rigidbody2D playerRigidbody2d;
     private SpriteRenderer spriteRenderer;
@@ -40,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRigidbody2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        hitbox = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -50,6 +57,11 @@ public class PlayerMovement : MonoBehaviour
         IsRunning = _horizontal != 0f;
         IsAimingUp = _vertical > 0f;
         IsAimingDown = _vertical < 0f;
+        
+        // update hitbox depending on whether it's standing or prone
+        bool isProne = IsAimingDown && !IsRunning && !IsJumping;
+        hitbox.size = isProne ? proneHitboxSize : standingHitboxSize;
+        hitbox.offset = isProne ? proneHitboxOffset : standingHitboxOffset;
 
         bool shouldFlip = _horizontal < 0
             || (_horizontal == 0 && spriteRenderer.flipX);
