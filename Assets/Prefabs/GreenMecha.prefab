@@ -238,6 +238,7 @@ MonoBehaviour:
   shootIntervalSeconds: 2
   firePoint: {fileID: 7101463309322480168}
   bulletPrefab: {fileID: -7918116676575726711, guid: d8d72130b953c24499414691d70df796, type: 3}
+  knockbackMagnitude: 200
 --- !u!114 &14414125351739540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,3 +252,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
   hitPoints: 100
+  particlesPrefab: {fileID: 6823744223716954244, guid: 0f03453a4e7ab0a4096b93e378bf8843, type: 3}

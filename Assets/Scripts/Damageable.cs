@@ -3,6 +3,7 @@ using UnityEngine;
 public class Damageable : MonoBehaviour
 {
     [SerializeField] private int hitPoints = 100;
+    [SerializeField] private GameObject particlesPrefab;
 
     private Rigidbody2D rb;
 
@@ -13,6 +14,7 @@ public class Damageable : MonoBehaviour
 
     public void TakeDamage(int amount, Vector2? knockback = null)
     {
+        Instantiate(particlesPrefab, transform.position, Quaternion.identity);
         hitPoints -= amount;
         if (hitPoints <= 0)
         {
