@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class GreenMecha : MonoBehaviour
 {
+    private const string PLAYER_TAG = "Player"; // TODO: tag handle or whatever
+
     [SerializeField] private float shootIntervalSeconds = 2f;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private float knockbackMagnitude = 200;
     
     private Animator animator;
 
@@ -44,6 +47,12 @@ public class GreenMecha : MonoBehaviour
     private void Shoot()
     {
         _shootRequested = false;
-        Bullet.Spawn(bulletPrefab, firePoint.position, Vector2.left);
+        Bullet.Spawn(
+            bulletPrefab,
+            PLAYER_TAG,
+            firePoint.position,
+            Vector2.left,
+            knockbackMagnitude
+        );
     }
 }

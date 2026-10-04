@@ -77,11 +77,11 @@ GameObject:
   - component: {fileID: 8311670255190956534}
   - component: {fileID: 443415338033519586}
   - component: {fileID: 4691389532677828893}
-  - component: {fileID: 1938011272269351443}
   - component: {fileID: 4332814906092628798}
+  - component: {fileID: 4826031188181104804}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,18 +305,6 @@ MonoBehaviour:
   firePointLeft: {fileID: 3060995775815550449}
   firePointGroundRight: {fileID: 8451595723387213434}
   firePointGroundLeft: {fileID: 7462377650963414255}
---- !u!114 &1938011272269351443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3463687709263455399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c994adb85f649dd47a12418ceebdc207, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!114 &4332814906092628798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +317,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27475a0520b9c9d428c0e5095b9e2af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &4826031188181104804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463687709263455399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975212b94b107814688c65de0838dad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  hitPoints: 100
 --- !u!1 &3925855045726733181
 GameObject:
   m_ObjectHideFlags: 0

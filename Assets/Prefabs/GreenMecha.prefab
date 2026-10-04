@@ -45,9 +45,10 @@ GameObject:
   - component: {fileID: 2305462793942728765}
   - component: {fileID: 8634029898633813568}
   - component: {fileID: 5336329334734079445}
+  - component: {fileID: 14414125351739540}
   m_Layer: 0
   m_Name: GreenMecha
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,3 +238,16 @@ MonoBehaviour:
   shootIntervalSeconds: 2
   firePoint: {fileID: 7101463309322480168}
   bulletPrefab: {fileID: -7918116676575726711, guid: d8d72130b953c24499414691d70df796, type: 3}
+--- !u!114 &14414125351739540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7196907148299500723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975212b94b107814688c65de0838dad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  hitPoints: 100

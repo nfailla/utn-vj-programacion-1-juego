@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerGun : MonoBehaviour
 {
+    private const string ENEMY_TAG = "Enemy"; // TODO: tag handle or whatever
+
     enum ShootDirection
     {
         Right,
@@ -109,7 +111,7 @@ public class PlayerGun : MonoBehaviour
         Transform firePoint = firePointAndDirection.Item1;
         Vector2 bulletDirection = firePointAndDirection.Item2;
 
-        Bullet.Spawn(bulletPrefab, firePoint.position, bulletDirection);
+        Bullet.Spawn(bulletPrefab, ENEMY_TAG, firePoint.position, bulletDirection);
 
         clip -= 1;
 

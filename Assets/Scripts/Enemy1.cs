@@ -2,18 +2,15 @@ using UnityEngine;
 
 public class Enemy1 : MonoBehaviour
 {
-    private int hitPoints = 100; // TODO: unhardcode
-
+    private const string PLAYER_TAG = "Player"; // TODO: tag handle or whatever
+    
     private int damage = 20;
 
-    private GameObject player; // TODO: make private and attach on Awake
-
-    private Rigidbody2D rigidBody2d;
+    private GameObject player;
 
     private void Awake()
     {
         player = GameObject.Find("Player"); // TODO: this is too brittle. Change the way we find the player here
-        rigidBody2d = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -44,22 +41,12 @@ public class Enemy1 : MonoBehaviour
          );
     }
 
-    public void TakeDamage(int amount, Vector2? knockback = null)
-    {
-        hitPoints -= amount;
-        Debug.Log("enemy hp: " + hitPoints);
-        if (hitPoints <= 0)
-        {
-            Destroy(gameObject);
-        }
-        if (knockback != null) rigidBody2d.AddForce(knockback.Value);
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerState playerState)) // Mmmm... is it good design? Probably just using Player is better.
+        if (collision.gameObject.CompareTag(PLAYER_TAG))
         {
-            playerState.TakeDamage(damage);
+            Damageable player = collision.gameObject.GetComponent<Damageable>();
+            player.TakeDamage(damage);
         }
     }
 }

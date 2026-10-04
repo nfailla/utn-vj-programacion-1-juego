@@ -9,13 +9,23 @@ public class Bullet : MonoBehaviour
     private float maxLifetime = 3f; // TODO: unhardcode
 
     [SerializeField] private GameObject bulletParticlesPrefab;
+    [SerializeField] private string _targetTag; // TODO: should probably be a list
 
     private Rigidbody2D bulletRigidbody2D;
-    private float knockbackMagnitude; // TODO: make parameterizable!
+    private float _knockbackMagnitude; // TODO: make parameterizable!
 
-    public static void Spawn(Bullet bulletPrefab, Vector3 position, Vector2 direction)
+
+    public static void Spawn(
+        Bullet bulletPrefab,
+        string targetTag,
+        Vector3 position,
+        Vector2 direction,
+        float knockBackMagnitude = 100f
+    )
     {
         Bullet bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
+        bullet._targetTag = targetTag;
+        bullet._knockbackMagnitude = knockBackMagnitude;
         bullet.Shoot(direction);
     }
 
@@ -26,16 +36,15 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        knockbackMagnitude = 100;
         Destroy(gameObject, maxLifetime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // TODO: use a superclass of Enemy1 (Enemy?)
-        if (collision.gameObject.TryGetComponent(out Enemy1 enemy))
+        if (collision.gameObject.CompareTag(_targetTag))
         {
-            enemy.TakeDamage(damage, bulletRigidbody2D.linearVelocity.normalized * knockbackMagnitude);
+            Damageable damageable = collision.gameObject.GetComponent<Damageable>();
+            damageable.TakeDamage(damage, bulletRigidbody2D.linearVelocity.normalized * _knockbackMagnitude);
             Instantiate(bulletParticlesPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
