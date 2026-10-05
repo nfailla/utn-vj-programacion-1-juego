@@ -73,6 +73,7 @@ public class PlayerGun : MonoBehaviour
 
         if (_clip < 1)
         {
+            // TODO: autoreload, or indicate the player that they should reload (by a sound and a visual indicator)?????
             StartReloading();
         }
         else
