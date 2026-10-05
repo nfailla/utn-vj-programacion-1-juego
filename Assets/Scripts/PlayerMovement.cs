@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,10 +9,8 @@ public class PlayerMovement : MonoBehaviour
         StraightUp,
         Up,
         StraightDown,
-        Ground,
+        Prone,
     }
-
-    public enum Direction { Left, Right }
 
     private const float GROUND_DETECTION_RADIUS = .10f; // TODO: unhardcode
     private const float MOVEMENT_SPEED = 5f; // TODO: unhardcode
@@ -27,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 proneHitboxOffset;
 
     private Rigidbody2D playerRigidbody2d;
-    private SpriteRenderer spriteRenderer;
 
     private float _horizontal;
     private float _vertical;
@@ -39,13 +37,11 @@ public class PlayerMovement : MonoBehaviour
     public bool IsJumping { get; private set; }
     public bool IsAimingUp { get; private set; }
     public bool IsAimingDown { get; private set; }
-    public Direction FacingDirection { get; private set; }
     public AimDirection AimingDirection { get; private set; }
 
     private void Awake()
     {
         playerRigidbody2d = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         hitbox = GetComponent<BoxCollider2D>();
     }
 
@@ -63,10 +59,13 @@ public class PlayerMovement : MonoBehaviour
         hitbox.size = isProne ? proneHitboxSize : standingHitboxSize;
         hitbox.offset = isProne ? proneHitboxOffset : standingHitboxOffset;
 
-        bool shouldFlip = _horizontal < 0
-            || (_horizontal == 0 && spriteRenderer.flipX);
-        spriteRenderer.flipX = shouldFlip;
-        FacingDirection = shouldFlip ? Direction.Left : Direction.Right;
+        bool shouldFlip = _horizontal < 0;
+
+        if (_horizontal != 0)
+        {
+            float yRotationDeg = shouldFlip ? 180f : 0f;
+            transform.rotation = Quaternion.Euler(0f, yRotationDeg, 0f);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
@@ -76,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         AimingDirection = _vertical switch
         {
             > 0f => IsRunning ? AimDirection.StraightUp : AimDirection.Up,
-            < 0f => IsRunning ? AimDirection.StraightDown : AimDirection.Ground,
+            < 0f => IsRunning ? AimDirection.StraightDown : AimDirection.Prone,
             _ => AimDirection.Straight,
         };
     }
