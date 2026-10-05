@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerGun : MonoBehaviour
 {
     private const string ENEMY_TAG = "Enemy"; // TODO: tag handle or whatever
+    private const int MAX_CLIP_SIZE = 8; // TODO: unhardcode
 
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform firePointStraight;
@@ -13,14 +14,12 @@ public class PlayerGun : MonoBehaviour
 
     private PlayerMovement movement;
 
-    private int CLIP_SIZE = 8; // TODO: unhardcode
-    private int clip;
-
+    private int _clip;
     private float reloadingDuration = 2f; // TODO: unhardcode
     private float cooldownDuration = .2f; // TODO: unhardcode
 
-    private float reloadingEndTime;
-    private float cooldownEndTime;
+    private float _reloadingEndTime;
+    private float _cooldownEndTime;
 
     private void Awake()
     {
@@ -29,7 +28,7 @@ public class PlayerGun : MonoBehaviour
 
     private void Start()
     {
-        clip = CLIP_SIZE;
+        _clip = MAX_CLIP_SIZE;
     }
 
     void Update()
@@ -49,32 +48,30 @@ public class PlayerGun : MonoBehaviour
 
         if (Input.GetKey(KeyCode.J))
         {
-            Shoot(movement.AimingDirection);
+            Shoot();
         }
     }
 
-    void Shoot(PlayerMovement.AimDirection direction)
+    void Shoot()
     {
         if (IsReloading() || IsCoolingDown()) return;
 
-        // TODO: in fact, probably each firePoint should know how to shoot to its direction
-        (Transform, Vector2) firePointAndDirection = direction switch {
-            PlayerMovement.AimDirection.Straight =>         (firePointStraight, firePointStraight.right),
-            PlayerMovement.AimDirection.StraightUp =>       (firePointStraightUp, firePointStraightUp.up + firePointStraightUp.right),
-            PlayerMovement.AimDirection.StraightDown =>     (firePointStraightDown, -firePointStraightDown.up + firePointStraightDown.right),
-            PlayerMovement.AimDirection.Up =>               (firePointUp, firePointStraightDown.up),
-            PlayerMovement.AimDirection.Prone =>            (firePointProne, firePointStraightDown.right),
-            _ => (firePointStraight, Vector2.right), // TODO: it should actually do nothing in this case!
+        Transform firePoint = movement.AimingDirection switch {
+            PlayerMovement.AimDirection.Straight =>     firePointStraight,
+            PlayerMovement.AimDirection.StraightUp =>   firePointStraightUp,
+            PlayerMovement.AimDirection.StraightDown => firePointStraightDown,
+            PlayerMovement.AimDirection.Up =>           firePointUp,
+            PlayerMovement.AimDirection.Prone =>        firePointProne,
+            _ => firePointStraight, // TODO: it should actually do nothing in this case!
         };
 
-        Transform firePoint = firePointAndDirection.Item1;
-        Vector2 bulletDirection = firePointAndDirection.Item2;
+        Vector2 bulletDirection = firePoint.right; // always to the right relative to the firePoint. Each firePoint is rotated accordingly
 
         Bullet.Spawn(bulletPrefab, ENEMY_TAG, firePoint.position, bulletDirection);
 
-        clip -= 1;
+        _clip -= 1;
 
-        if (clip < 1)
+        if (_clip < 1)
         {
             StartReloading();
         }
@@ -86,22 +83,22 @@ public class PlayerGun : MonoBehaviour
 
     private bool IsReloading()
     {
-        return Time.time < reloadingEndTime;
+        return Time.time < _reloadingEndTime;
     }
 
     private bool IsCoolingDown()
     {
-        return Time.time < cooldownEndTime;
+        return Time.time < _cooldownEndTime;
     }
 
     private void StartReloading()
     {
-        reloadingEndTime = Time.time + reloadingDuration;
-        clip = CLIP_SIZE;
+        _reloadingEndTime = Time.time + reloadingDuration;
+        _clip = MAX_CLIP_SIZE;
     }
 
     private void StartCooldown()
     {
-        cooldownEndTime = Time.time + cooldownDuration;
+        _cooldownEndTime = Time.time + cooldownDuration;
     }
 }
