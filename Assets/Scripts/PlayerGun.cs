@@ -11,8 +11,10 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private Transform firePointStraightDown;
     [SerializeField] private Transform firePointUp;
     [SerializeField] private Transform firePointProne;
+    [SerializeField] private ParticleSystem bulletShellParticles;
 
     private PlayerMovement movement;
+
 
     private int _clip;
     private float reloadingDuration = 2f; // TODO: unhardcode
@@ -68,6 +70,7 @@ public class PlayerGun : MonoBehaviour
         Vector2 bulletDirection = firePoint.right; // always to the right relative to the firePoint. Each firePoint is rotated accordingly
 
         Bullet.Spawn(bulletPrefab, ENEMY_TAG, firePoint.position, bulletDirection);
+        bulletShellParticles.Emit(1);
 
         _clip -= 1;
 

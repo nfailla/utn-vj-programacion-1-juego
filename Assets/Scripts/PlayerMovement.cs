@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 standingHitboxOffset;
     [SerializeField] private Vector2 proneHitboxSize;
     [SerializeField] private Vector2 proneHitboxOffset;
+    [SerializeField] private Vector3 standingBulletShellParticlesPosition;
+    [SerializeField] private Vector3 proneBulletShellParticlesPosition;
+    [SerializeField] private ParticleSystem bulletShellParticles;
 
     private Rigidbody2D playerRigidbody2d;
 
@@ -58,6 +61,14 @@ public class PlayerMovement : MonoBehaviour
         bool isProne = IsAimingDown && !IsRunning && !IsJumping;
         hitbox.size = isProne ? proneHitboxSize : standingHitboxSize;
         hitbox.offset = isProne ? proneHitboxOffset : standingHitboxOffset;
+
+        // update position of the bullet shell particles...
+        // but I wonder if it would be a better idea to have two particle systems
+        // in different positions and emitting in one or the other
+        bulletShellParticles.transform.SetLocalPositionAndRotation(
+            isProne ? proneBulletShellParticlesPosition : standingBulletShellParticlesPosition,
+            bulletShellParticles.transform.rotation
+        );
 
         bool shouldFlip = _horizontal < 0;
 
