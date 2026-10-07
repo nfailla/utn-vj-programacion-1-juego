@@ -43,6 +43,8 @@ public class GreenMecha : MonoBehaviour
 
     private void LookTowardsPlayer()
     {
+        if (player == null) return;
+
         float lookTowardsSign = Mathf.Sign(player.transform.position.x - transform.position.x);
         _facingRight = lookTowardsSign != -1;
 
