@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: 201de4c3096961740a3112f03e5eac3d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3223147000024819982
+    second: rock-tiles_0
+  - first:
+      213: -2806095939497177015
+    second: rock-tiles_1
+  - first:
+      213: -3228908136580244600
+    second: rock-tiles_2
+  - first:
+      213: -6095662471296693467
+    second: rock-tiles_3
+  - first:
+      213: -4542449256830289535
+    second: rock-tiles_4
+  - first:
+      213: 5231764034437687603
+    second: rock-tiles_5
+  - first:
+      213: 6153757181796759349
+    second: rock-tiles_6
+  - first:
+      213: -4763645956099347171
+    second: rock-tiles_7
+  - first:
+      213: 5936785073346023778
+    second: rock-tiles_8
+  - first:
+      213: 1751627381147576153
+    second: rock-tiles_9
+  - first:
+      213: -7010804960102132168
+    second: rock-tiles_10
+  - first:
+      213: 886182106699223705
+    second: rock-tiles_11
+  - first:
+      213: 6681386393396685559
+    second: rock-tiles_12
+  - first:
+      213: -3644763890848284836
+    second: rock-tiles_13
+  - first:
+      213: 290858070040758643
+    second: rock-tiles_14
+  - first:
+      213: -724751037180016238
+    second: rock-tiles_15
+  - first:
+      213: 6849541687950377765
+    second: rock-tiles_16
+  - first:
+      213: 3867213947840774477
+    second: rock-tiles_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 50
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rock-tiles_0
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 1043
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f697a461e41543d0800000000000000
+      internalID: -3223147000024819982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_1
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 1043
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 940da904c9ebe09d0800000000000000
+      internalID: -2806095939497177015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_2
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 1043
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88b14c2482d9033d0800000000000000
+      internalID: -3228908136580244600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_3
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 1063
+        width: 50
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52b4eaf474bd76ba0800000000000000
+      internalID: -6095662471296693467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_4
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 989
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 189b464c77af5f0c0800000000000000
+      internalID: -4542449256830289535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_5
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 989
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 339a2559ba5fa9840800000000000000
+      internalID: 5231764034437687603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_6
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 989
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53731078d89866550800000000000000
+      internalID: 6153757181796759349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_7
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 989
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1de8f6ed3124edb0800000000000000
+      internalID: -4763645956099347171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_8
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 989
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26191acd192b36250800000000000000
+      internalID: 5936785073346023778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_9
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 1043
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 957262892d70f4810800000000000000
+      internalID: 1751627381147576153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_10
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 935
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 836d09b980e94be90800000000000000
+      internalID: -7010804960102132168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_11
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 935
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9925d1c4ee95c4c00800000000000000
+      internalID: 886182106699223705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_12
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 935
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7faa989768d09bc50800000000000000
+      internalID: 6681386393396685559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_13
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 935
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5f31d35d823b6dc0800000000000000
+      internalID: -3644763890848284836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_14
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 935
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 379c5d8afd5590400800000000000000
+      internalID: 290858070040758643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_15
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 881
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2990a4685ca21f5f0800000000000000
+      internalID: -724751037180016238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_16
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 881
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5230380ffd57e0f50800000000000000
+      internalID: 6849541687950377765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rock-tiles_17
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 881
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d414c7f989a1ba530800000000000000
+      internalID: 3867213947840774477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a70ad5d45a188da4791a55bea3778d8c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      rock-tiles_0: -3223147000024819982
+      rock-tiles_1: -2806095939497177015
+      rock-tiles_10: -7010804960102132168
+      rock-tiles_11: 886182106699223705
+      rock-tiles_12: 6681386393396685559
+      rock-tiles_13: -3644763890848284836
+      rock-tiles_14: 290858070040758643
+      rock-tiles_15: -724751037180016238
+      rock-tiles_16: 6849541687950377765
+      rock-tiles_17: 3867213947840774477
+      rock-tiles_2: -3228908136580244600
+      rock-tiles_3: -6095662471296693467
+      rock-tiles_4: -4542449256830289535
+      rock-tiles_5: 5231764034437687603
+      rock-tiles_6: 6153757181796759349
+      rock-tiles_7: -4763645956099347171
+      rock-tiles_8: 5936785073346023778
+      rock-tiles_9: 1751627381147576153
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
