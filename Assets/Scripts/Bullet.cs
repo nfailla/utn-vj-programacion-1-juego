@@ -2,17 +2,16 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private string cameraBoundaryTag;
+
     private float speed = 20f; // TODO: unhardcode
     private int damage = 25; // TODO: unhardcode
     
     // Max lifetime of the bullet if it doesn't get destroyed first by hitting something
     private float maxLifetime = 3f; // TODO: unhardcode; instead of controlling lifetime, make them disappear when going out of the screen
-
-    [SerializeField] private string _targetTag; // TODO: should probably be a list
-
+    private string _targetTag; // TODO: should probably be a list
     private Rigidbody2D bulletRigidbody2D;
     private float _knockbackMagnitude; // TODO: make parameterizable!
-
 
     public static void Spawn(
         Bullet bulletPrefab,
@@ -40,6 +39,12 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag(cameraBoundaryTag))
+        {
+            // Just destroy the bullet if it goes beyond the camera boundaries
+            Destroy(gameObject);
+        }
+
         if (collision.gameObject.CompareTag(_targetTag))
         {
             Damageable damageable = collision.gameObject.GetComponent<Damageable>();

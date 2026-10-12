@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 8634029898633813568}
   - component: {fileID: 5336329334734079445}
   - component: {fileID: 14414125351739540}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GreenMecha
   m_TagString: Enemy
   m_Icon: {fileID: 0}

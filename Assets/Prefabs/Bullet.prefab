@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3296202898569832204}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdbd3406f9321a46beaf313c7ef45d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  bulletParticlesPrefab: {fileID: 6823744223716954244, guid: 58994baa96846904c80bd7c596745fc6, type: 3}
+  cameraBoundaryTag: CameraBoundary
 --- !u!50 &6562549209631827886
 Rigidbody2D:
   serializedVersion: 5
