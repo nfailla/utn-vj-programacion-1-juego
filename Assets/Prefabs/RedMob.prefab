@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
   damage: 20
   knockbackMagnitude: 5
-  movementSpeed: 1
+  movementSpeed: 3
 --- !u!95 &4908243588594947586
 Animator:
   serializedVersion: 7
@@ -218,5 +218,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975212b94b107814688c65de0838dad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  hitPoints: 100
+  hitPoints: 50
   particlesPrefab: {fileID: 6823744223716954244, guid: 0f03453a4e7ab0a4096b93e378bf8843, type: 3}
