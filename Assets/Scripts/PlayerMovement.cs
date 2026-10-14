@@ -20,10 +20,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     
     private BoxCollider2D hitbox;
-    [SerializeField] private Vector2 standingHitboxSize;
     [SerializeField] private Vector2 standingHitboxOffset;
-    [SerializeField] private Vector2 proneHitboxSize;
+    [SerializeField] private Vector2 standingHitboxSize;
+    
     [SerializeField] private Vector2 proneHitboxOffset;
+    [SerializeField] private Vector2 proneHitboxSize;
+
+    [SerializeField] private Vector2 jumpingHitboxOffset;
+    [SerializeField] private Vector2 jumpingHitboxSize;
+
     [SerializeField] private Vector3 standingBulletShellParticlesPosition;
     [SerializeField] private Vector3 proneBulletShellParticlesPosition;
     [SerializeField] private ParticleSystem bulletShellParticles;
@@ -57,10 +62,23 @@ public class PlayerMovement : MonoBehaviour
         IsAimingUp = _vertical > 0f;
         IsAimingDown = _vertical < 0f;
         
-        // update hitbox depending on whether it's standing or prone
+        // TODO: a state machine would improve this code dramatically
+
         bool isProne = IsAimingDown && !IsRunning && !IsJumping;
-        hitbox.size = isProne ? proneHitboxSize : standingHitboxSize;
-        hitbox.offset = isProne ? proneHitboxOffset : standingHitboxOffset;
+
+        // update hitbox
+        if (IsJumping)
+        {
+            // set hitbox for the player when jumping
+            hitbox.size = jumpingHitboxSize;
+            hitbox.offset = jumpingHitboxOffset;
+        }
+        else
+        {
+            // set hitbox for the player when standing or prone
+            hitbox.size = isProne ? proneHitboxSize : standingHitboxSize;
+            hitbox.offset = isProne ? proneHitboxOffset : standingHitboxOffset;
+        }
 
         // update position of the bullet shell particles...
         // but I wonder if it would be a better idea to have two particle systems
