@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
         Straight,
         StraightUp,
         Up,
+        Down,
         StraightDown,
         Prone,
     }
@@ -104,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         AimingDirection = _vertical switch
         {
             > 0f => IsRunning ? AimDirection.StraightUp : AimDirection.Up,
-            < 0f => IsRunning ? AimDirection.StraightDown : AimDirection.Prone,
+            < 0f => IsRunning ? AimDirection.StraightDown : (IsJumping ? AimDirection.Down : AimDirection.Prone), // TODO: cleanup
             _ => AimDirection.Straight,
         };
     }

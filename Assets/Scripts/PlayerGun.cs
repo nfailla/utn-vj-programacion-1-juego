@@ -11,6 +11,7 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private Transform firePointStraightDown;
     [SerializeField] private Transform firePointUp;
     [SerializeField] private Transform firePointProne;
+    [SerializeField] private Transform firePointDown;
     [SerializeField] private ParticleSystem bulletShellParticles;
 
     private PlayerMovement movement;
@@ -35,12 +36,6 @@ public class PlayerGun : MonoBehaviour
 
     void Update()
     {
-        if (movement.IsJumping)
-        {
-            // Do nothing while jumping: no shooting, no reloading
-            return;
-        }
-
         // TODO: unhardcode the input keys
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -63,6 +58,7 @@ public class PlayerGun : MonoBehaviour
             PlayerMovement.AimDirection.StraightUp =>   firePointStraightUp,
             PlayerMovement.AimDirection.StraightDown => firePointStraightDown,
             PlayerMovement.AimDirection.Up =>           firePointUp,
+            PlayerMovement.AimDirection.Down =>         firePointDown,
             PlayerMovement.AimDirection.Prone =>        firePointProne,
             _ => firePointStraight, // TODO: it should actually do nothing in this case!
         };
