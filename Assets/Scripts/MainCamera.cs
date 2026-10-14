@@ -1,10 +1,15 @@
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class MainCamera : MonoBehaviour
 {
-    [SerializeField] Transform followTarget;
+    public Transform FollowTarget { get; set; }
 
     private float _minXPosition;
+
+    private void Awake()
+    {
+        FollowTarget = GameObject.Find("Player").transform; // TODO: it's too brittle
+    }
 
     private void Start()
     {
@@ -13,9 +18,9 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!followTarget) return;
+        if (!FollowTarget) return;
 
-        float targetXPosition = Mathf.Max(_minXPosition, followTarget.transform.position.x);
+        float targetXPosition = Mathf.Max(_minXPosition, FollowTarget.transform.position.x);
         
         // so the camera never goes back
         _minXPosition = targetXPosition;
@@ -24,6 +29,18 @@ public class CameraFollow : MonoBehaviour
             targetXPosition,
             transform.position.y, // don't move on Y
             transform.position.z // don't move on Z
+        );
+    }
+
+    public void RestartToPosition(Vector3 position)
+    {
+        // update the current minXPosition accordingly
+        _minXPosition = position.x;
+
+        transform.position = new Vector3(
+            position.x,
+            position.y,
+            transform.position.z // never move on Z!
         );
     }
 }
