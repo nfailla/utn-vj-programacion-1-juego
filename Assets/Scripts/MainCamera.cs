@@ -15,15 +15,14 @@ public class CameraFollow : MonoBehaviour
     {
         if (!followTarget) return;
 
-        // This way the camera never goes back
         float targetXPosition = Mathf.Max(_minXPosition, followTarget.transform.position.x);
-        float targetYPosition = followTarget.transform.position.y;
-
+        
+        // so the camera never goes back
         _minXPosition = targetXPosition;
 
         transform.position = new Vector3(
             targetXPosition,
-            targetYPosition,
+            transform.position.y, // don't move on Y
             transform.position.z // don't move on Z
         );
     }
