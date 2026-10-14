@@ -17,12 +17,14 @@ public class CameraFollow : MonoBehaviour
 
         // This way the camera never goes back
         float targetXPosition = Mathf.Max(_minXPosition, followTarget.transform.position.x);
+        float targetYPosition = followTarget.transform.position.y;
+
         _minXPosition = targetXPosition;
 
         transform.position = new Vector3(
             targetXPosition,
-            transform.position.y,
-            transform.position.z
+            targetYPosition,
+            transform.position.z // don't move on Z
         );
     }
 }
