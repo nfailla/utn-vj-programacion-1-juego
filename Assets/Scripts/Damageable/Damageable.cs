@@ -35,4 +35,9 @@ public class Damageable : MonoBehaviour
 
         if (knockback != null) rb.AddForce(knockback.Value);
     }
+
+    public void OnLevelFinish()
+    {
+        enabled = false;
+    }
 }

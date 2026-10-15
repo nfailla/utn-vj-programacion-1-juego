@@ -21,4 +21,9 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool("isAimingUp", movement.IsAimingUp);
         animator.SetBool("isAimingDown", movement.IsAimingDown);
     }
+
+    public void OnLevelFinish()
+    {
+        animator.SetBool("isCelebrating", true);
+    }
 }

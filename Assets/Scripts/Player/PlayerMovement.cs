@@ -141,4 +141,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private void EndKnockback() => _isKnockedBack = false;
 
+    public void OnLevelFinish()
+    {
+        playerRigidbody2d.linearVelocityX = 0;
+        enabled = false;
+    }
 }

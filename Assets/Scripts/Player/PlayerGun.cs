@@ -101,4 +101,9 @@ public class PlayerGun : MonoBehaviour
     {
         _cooldownEndTime = Time.time + cooldownDuration;
     }
+
+    public void OnLevelFinish()
+    {
+        enabled = false;
+    }
 }
