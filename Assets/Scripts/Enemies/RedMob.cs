@@ -6,7 +6,9 @@ public class RedMob : MonoBehaviour
     
     [SerializeField] private int damage = 20;
     [SerializeField] private float knockbackMagnitude = 5f;
-    [SerializeField] private float movementSpeed = 1f;
+    [SerializeField] private float movementSpeed = 3f;
+    [SerializeField] private float acceleration = 15f;
+    [SerializeField] private float deceleration = 8f;
 
     private GameObject player;
     private Rigidbody2D rb;
@@ -17,7 +19,7 @@ public class RedMob : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         FollowPlayer();
     }
@@ -37,7 +39,16 @@ public class RedMob : MonoBehaviour
         targetPosition.y = transform.position.y;
 
         float movementSign = Mathf.Sign(player.transform.position.x - transform.position.x);
-        rb.linearVelocityX = movementSpeed * movementSign;
+
+        float targetSpeed = movementSpeed * movementSign;
+
+        float accelerationRate = Mathf.Abs(targetSpeed) < 0.01f ? deceleration : acceleration;
+
+        rb.linearVelocityX = Mathf.MoveTowards(
+            rb.linearVelocityX,
+            targetSpeed,
+            accelerationRate * Time.fixedDeltaTime // this maxDelta is the maximum change for that given fixed interval
+        );
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
