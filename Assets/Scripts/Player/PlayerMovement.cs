@@ -143,6 +143,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnLevelFinish()
     {
+        // HACK: since the celebration stance is standing, if
+        // the hitbox is different than the standing one for whatever
+        // reason it looks buggy. I have to find a better way to do this.
+        hitbox.size = standingHitboxSize;
+        hitbox.offset = standingHitboxOffset;
+
         playerRigidbody2d.linearVelocityX = 0;
         enabled = false;
     }
