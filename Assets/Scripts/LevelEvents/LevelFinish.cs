@@ -17,8 +17,6 @@ public class LevelFinish : MonoBehaviour
             playerGun.OnLevelFinish();
             damageable.OnLevelFinish();
             playerAnimation.OnLevelFinish();
-
-            Debug.Log("Ganaste papáaaaa!");
         }
     }
 }
