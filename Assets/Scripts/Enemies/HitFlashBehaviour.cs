@@ -5,6 +5,7 @@ public class HitFlashBehaviour : MonoBehaviour
 {
     [SerializeField] private Color flashColor = Color.softRed;
     [SerializeField] private float flashDuration = .2f;
+    [SerializeField] private int flashTimes = 3; // how many times it will flash
 
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
@@ -21,9 +22,13 @@ public class HitFlashBehaviour : MonoBehaviour
 
     private IEnumerator FlashCoroutine()
     {
-        _spriteRenderer.color = flashColor;
-        yield return new WaitForSeconds(flashDuration);
-        _spriteRenderer.color = _originalColor;
+        for (int i = 0; i < flashTimes; i++)
+        {
+            _spriteRenderer.color = flashColor;
+            yield return new WaitForSeconds(flashDuration);
+            _spriteRenderer.color = _originalColor;
+            yield return new WaitForSeconds(flashDuration);
+        }
 
         _flashCoroutine = null;
     }

@@ -268,8 +268,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a096eb803bcb9448a80512bd827f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitFlashBehaviour
-  flashColor: {r: 0.8627452, g: 0.1921569, b: 0.1960784, a: 1}
-  flashDuration: 0.2
+  flashColor: {r: 0.4575472, g: 1, b: 0.5144172, a: 1}
+  flashDuration: 0.05
+  flashTimes: 3
 --- !u!1001 &394611976060808395
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -238,7 +238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   flashColor: {r: 0.8627452, g: 0.1921569, b: 0.1960784, a: 1}
-  flashDuration: 0.2
+  flashDuration: 0.05
+  flashTimes: 3
 --- !u!1001 &8728663621793814556
 PrefabInstance:
   m_ObjectHideFlags: 0
