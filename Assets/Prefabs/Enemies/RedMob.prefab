@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4908243588594947586}
   - component: {fileID: 8266159576280434344}
   - component: {fileID: 7792722910869205426}
+  - component: {fileID: 3292154295908192470}
   m_Layer: 8
   m_Name: RedMob
   m_TagString: Enemy
@@ -223,6 +224,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   hitPoints: 150
   particlesPrefab: {fileID: 6823744223716954244, guid: 0f03453a4e7ab0a4096b93e378bf8843, type: 3}
+  hitFlashBehaviour: {fileID: 3292154295908192470}
+--- !u!114 &3292154295908192470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7811746356443826370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a096eb803bcb9448a80512bd827f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  flashColor: {r: 0.8627452, g: 0.1921569, b: 0.1960784, a: 1}
+  flashDuration: 0.2
 --- !u!1001 &8728663621793814556
 PrefabInstance:
   m_ObjectHideFlags: 0

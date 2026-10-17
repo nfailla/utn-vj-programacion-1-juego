@@ -309,7 +309,7 @@ MonoBehaviour:
   firePointDown: {fileID: 284354522157804380}
   bulletShellParticles: {fileID: 8715646833978837975}
   reloadingDuration: 2
-  cooldownDuration: 0.1
+  cooldownDuration: 0.2
 --- !u!114 &4332814906092628798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
   hitPoints: 1
   particlesPrefab: {fileID: 6823744223716954244, guid: 58994baa96846904c80bd7c596745fc6, type: 3}
+  hitFlashBehaviour: {fileID: 0}
 --- !u!1 &3925855045726733181
 GameObject:
   m_ObjectHideFlags: 0

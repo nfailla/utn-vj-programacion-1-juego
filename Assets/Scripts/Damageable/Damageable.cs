@@ -4,6 +4,7 @@ public class Damageable : MonoBehaviour
 {
     [SerializeField] private int hitPoints = 100;
     [SerializeField] private GameObject particlesPrefab;
+    [SerializeField] private HitFlashBehaviour hitFlashBehaviour;
 
     // FIXME: I have this here for the sake of simplicity, but this is bad design:
     // this class is intended for other uses too, so coupling it to the
@@ -31,6 +32,11 @@ public class Damageable : MonoBehaviour
                 playerRespawner.RequestRespawn();
             }
             Destroy(gameObject);
+        }
+
+        if (hitFlashBehaviour)
+        {
+            hitFlashBehaviour.Flash();
         }
 
         if (knockback != null) rb.AddForce(knockback.Value);
