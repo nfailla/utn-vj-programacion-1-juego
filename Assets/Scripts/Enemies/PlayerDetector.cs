@@ -18,12 +18,4 @@ public class PlayerDetector : MonoBehaviour
             enemyBehaviorScript.enabled = true;
         }
     }
-
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        enemyBehaviorScript.enabled = false;
-    //    }
-    //}
 }

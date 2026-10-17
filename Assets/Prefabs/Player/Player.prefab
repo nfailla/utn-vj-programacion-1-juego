@@ -308,6 +308,8 @@ MonoBehaviour:
   firePointProne: {fileID: 8451595723387213434}
   firePointDown: {fileID: 284354522157804380}
   bulletShellParticles: {fileID: 8715646833978837975}
+  reloadingDuration: 2
+  cooldownDuration: 0.1
 --- !u!114 &4332814906092628798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,30 +499,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1256155187204361987}
     m_Modifications:
-    - target: {fileID: 2108758979371483604, guid: c567f091ff242f74187e446e8cb8f778, type: 3}
-      propertyPath: ShapeModule.m_Rotation.x
-      value: -30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2108758979371483604, guid: c567f091ff242f74187e446e8cb8f778, type: 3}
-      propertyPath: ShapeModule.m_Rotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2108758979371483604, guid: c567f091ff242f74187e446e8cb8f778, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 2108758979371483604, guid: c567f091ff242f74187e446e8cb8f778, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2108758979371483604, guid: c567f091ff242f74187e446e8cb8f778, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2108758979371483604, guid: c567f091ff242f74187e446e8cb8f778, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.91066456
-      objectReference: {fileID: 0}
     - target: {fileID: 4990757989227074959, guid: c567f091ff242f74187e446e8cb8f778, type: 3}
       propertyPath: m_Name
       value: BulletShellParticles

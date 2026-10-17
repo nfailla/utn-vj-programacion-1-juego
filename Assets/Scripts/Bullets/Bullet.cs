@@ -4,8 +4,8 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private string cameraBoundaryTag;
 
-    private float speed = 20f; // TODO: unhardcode
-    private int damage = 25; // TODO: unhardcode
+    [SerializeField] private float speed = 20f; // TODO: unhardcode
+    [SerializeField] private int damage = 25; // TODO: unhardcode
     
     // Max lifetime of the bullet if it doesn't get destroyed first by hitting something
     private float maxLifetime = 3f; // TODO: unhardcode; instead of controlling lifetime, make them disappear when going out of the screen

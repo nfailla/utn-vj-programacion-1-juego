@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerGun : MonoBehaviour
 {
     private const string ENEMY_TAG = "Enemy"; // TODO: tag handle or whatever
-    private const int MAX_CLIP_SIZE = 8; // TODO: unhardcode
+    [SerializeField] private const int MAX_CLIP_SIZE = 20; // TODO: unhardcode
 
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform firePointStraight;
@@ -14,12 +14,13 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private Transform firePointDown;
     [SerializeField] private ParticleSystem bulletShellParticles;
 
+    [SerializeField] private float reloadingDuration = 2f; // duration of a full gun reload
+    [SerializeField] private float cooldownDuration = .2f; // time between one bullet firing and the next one
+
     private PlayerMovement movement;
 
 
     private int _clip;
-    private float reloadingDuration = 2f; // TODO: unhardcode
-    private float cooldownDuration = .2f; // TODO: unhardcode
 
     private float _reloadingEndTime;
     private float _cooldownEndTime;
