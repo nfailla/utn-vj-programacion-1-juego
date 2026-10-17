@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8634029898633813568}
   - component: {fileID: 5336329334734079445}
   - component: {fileID: 14414125351739540}
+  - component: {fileID: 353183561823155313}
   m_Layer: 8
   m_Name: GreenMecha
   m_TagString: Enemy
@@ -254,6 +255,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
   hitPoints: 300
   particlesPrefab: {fileID: 6823744223716954244, guid: 0f03453a4e7ab0a4096b93e378bf8843, type: 3}
+  hitFlashBehaviour: {fileID: 353183561823155313}
+--- !u!114 &353183561823155313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7196907148299500723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a096eb803bcb9448a80512bd827f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitFlashBehaviour
+  flashColor: {r: 0.8627452, g: 0.1921569, b: 0.1960784, a: 1}
+  flashDuration: 0.2
 --- !u!1001 &394611976060808395
 PrefabInstance:
   m_ObjectHideFlags: 0
