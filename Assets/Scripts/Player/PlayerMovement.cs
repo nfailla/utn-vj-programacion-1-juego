@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
         Prone,
     }
 
-    private const float GROUND_DETECTION_RADIUS = .10f; // TODO: unhardcode
+    private const float GROUND_DETECTION_RADIUS = .2f; // TODO: unhardcode
     private const float MOVEMENT_SPEED = 5f; // TODO: unhardcode
     private const float KNOCKBACK_DURATION_SECONDS = 1f; // TODO: unhardcode
 
