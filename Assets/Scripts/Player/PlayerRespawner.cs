@@ -2,20 +2,12 @@ using UnityEngine;
 
 public class PlayerRespawner : MonoBehaviour
 {
-    [SerializeField] private GameObject initialSpawner;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private float timeToRespawn;
     [SerializeField] private MainCamera mainCamera;
 
     private bool _respawnRequested;
     private float _respawnTime;
-
-    public GameObject ActiveSpawner { get; set; }
-
-    private void Awake()
-    {
-        ActiveSpawner = initialSpawner;
-    }
 
     private void Update()
     {
@@ -29,10 +21,7 @@ public class PlayerRespawner : MonoBehaviour
     {
         _respawnRequested = false;
 
-        Vector3 spawnPosition = ActiveSpawner.transform.position;
-
-        GameObject instantiatedPlayer = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
-        mainCamera.RestartToPosition(spawnPosition);
+        GameObject instantiatedPlayer = Instantiate(playerPrefab, transform.position, Quaternion.identity);
         mainCamera.FollowTarget = instantiatedPlayer.transform;
     }
 
