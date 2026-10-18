@@ -119,4 +119,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6fd3d970baa8348a9d4a686be4b29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  triggerTag: EnemySpawnerTrigger
   enemyPrefab: {fileID: 7811746356443826370, guid: 163bb8da82a4c59488ed3f1c235f27ba, type: 3}
