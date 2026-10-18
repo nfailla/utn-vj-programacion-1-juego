@@ -1,21 +1,17 @@
+using System;
 using UnityEngine;
 
 public class PlayerDetector : MonoBehaviour
 {
-    // this works because we only have one behavior script to enable/disable
-    // we would do it differently otherwise
-    [SerializeField] MonoBehaviour enemyBehaviorScript;
+    [SerializeField] private string playerTag = "Player";
 
-    private void Awake()
-    {
-        enemyBehaviorScript.enabled = false;
-    }
+    public event Action<GameObject> OnPlayerDetected;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag(playerTag))
         {
-            enemyBehaviorScript.enabled = true;
+            OnPlayerDetected?.Invoke(collision.gameObject);
         }
     }
 }

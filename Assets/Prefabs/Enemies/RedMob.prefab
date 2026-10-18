@@ -129,6 +129,7 @@ MonoBehaviour:
   movementSpeed: 3
   acceleration: 15
   deceleration: 8
+  playerDetector: {fileID: 2359394929136034878}
 --- !u!95 &4908243588594947586
 Animator:
   serializedVersion: 7
@@ -301,6 +302,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f4164cd1d9d4b6479a5c1bfb8dd5eb4, type: 3}
+--- !u!114 &2359394929136034878 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6457089286434454562, guid: 7f4164cd1d9d4b6479a5c1bfb8dd5eb4, type: 3}
+  m_PrefabInstance: {fileID: 8728663621793814556}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eae6f4591f4eb4429b1e06c072f679c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!4 &3577340474887391944 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5226204596647449300, guid: 7f4164cd1d9d4b6479a5c1bfb8dd5eb4, type: 3}

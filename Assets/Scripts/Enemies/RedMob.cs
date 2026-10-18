@@ -10,13 +10,31 @@ public class RedMob : MonoBehaviour
     [SerializeField] private float acceleration = 15f;
     [SerializeField] private float deceleration = 8f;
 
-    private GameObject player;
+    [SerializeField] private PlayerDetector playerDetector;
+
+    private GameObject _player;
     private Rigidbody2D rb;
 
     private void Awake()
     {
-        player = GameObject.Find("Player"); // TODO: this is too brittle. Change the way we find the player here
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnEnable()
+    {
+        // subscribe to the player detected event
+        playerDetector.OnPlayerDetected += HandlePlayerDetected;
+    }
+
+    private void OnDisable()
+    {
+        // unsubscribe to the player detected event
+        playerDetector.OnPlayerDetected -= HandlePlayerDetected;
+    }
+
+    private void HandlePlayerDetected(GameObject player)
+    {
+        _player = player;
     }
 
     private void FixedUpdate()
@@ -29,16 +47,16 @@ public class RedMob : MonoBehaviour
      */
     private void FollowPlayer()
     {
-        if (player == null) return;
+        if (_player == null) return;
 
         // the target position is the player's horizontal position.
         // We don't want the enemy to try to reach the player vertically by
-        // this, so the vertical position is always the current RedMob's vertical
+        // this, so the target vertical position is the current RedMob's vertical
         // position, always.
-        Vector3 targetPosition = player.transform.position;
+        Vector3 targetPosition = _player.transform.position;
         targetPosition.y = transform.position.y;
 
-        float movementSign = Mathf.Sign(player.transform.position.x - transform.position.x);
+        float movementSign = Mathf.Sign(_player.transform.position.x - transform.position.x);
 
         float targetSpeed = movementSpeed * movementSign;
 
