@@ -1,5 +1,8 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Damageable))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
     public enum AimDirection
@@ -12,14 +15,12 @@ public class PlayerMovement : MonoBehaviour
         Prone,
     }
 
-    private const float GROUND_DETECTION_RADIUS = .2f; // TODO: unhardcode
-    private const float MOVEMENT_SPEED = 5f; // TODO: unhardcode
-    private const float KNOCKBACK_DURATION_SECONDS = 1f; // TODO: unhardcode
+    [SerializeField] private const float groundDetectionRadius = .2f;
+    [SerializeField] private const float movementSpeed = 5f;
 
     [SerializeField] private Transform groundDetector;
     [SerializeField] private LayerMask groundLayer;
     
-    private BoxCollider2D hitbox;
     [SerializeField] private Vector2 standingHitboxOffset;
     [SerializeField] private Vector2 standingHitboxSize;
     
@@ -33,13 +34,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 proneBulletShellParticlesPosition;
     [SerializeField] private ParticleSystem bulletShellParticles;
 
-    private Rigidbody2D playerRigidbody2d;
+    [SerializeField] private int maxPlayerHp = 1;
+
+    private BoxCollider2D _hitbox;
+    private Rigidbody2D _rb;
 
     private float _horizontal;
     private float _vertical;
     private bool _isAttemptingToJump;
     private bool _isGrounded;
-    private bool _isKnockedBack;
 
     public bool IsRunning { get; private set; }
     public bool IsJumping { get; private set; }
@@ -47,10 +50,13 @@ public class PlayerMovement : MonoBehaviour
     public bool IsAimingDown { get; private set; }
     public AimDirection AimingDirection { get; private set; }
 
+    private Damageable _damageable;
+
     private void Awake()
     {
-        playerRigidbody2d = GetComponent<Rigidbody2D>();
-        hitbox = GetComponent<BoxCollider2D>();
+        _damageable = GetComponent<Damageable>();
+        _rb = GetComponent<Rigidbody2D>();
+        _hitbox = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -70,14 +76,14 @@ public class PlayerMovement : MonoBehaviour
         if (IsJumping)
         {
             // set hitbox for the player when jumping
-            hitbox.size = jumpingHitboxSize;
-            hitbox.offset = jumpingHitboxOffset;
+            _hitbox.size = jumpingHitboxSize;
+            _hitbox.offset = jumpingHitboxOffset;
         }
         else
         {
             // set hitbox for the player when standing or prone
-            hitbox.size = isProne ? proneHitboxSize : standingHitboxSize;
-            hitbox.offset = isProne ? proneHitboxOffset : standingHitboxOffset;
+            _hitbox.size = isProne ? proneHitboxSize : standingHitboxSize;
+            _hitbox.offset = isProne ? proneHitboxOffset : standingHitboxOffset;
         }
 
         // update position of the bullet shell particles...
@@ -111,14 +117,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!_isKnockedBack)
-        {
-            playerRigidbody2d.linearVelocityX = MOVEMENT_SPEED * _horizontal;
-        }
+        _rb.linearVelocityX = movementSpeed * _horizontal;
 
         _isGrounded = Physics2D.OverlapCircle(
             groundDetector.position,
-            GROUND_DETECTION_RADIUS,
+            groundDetectionRadius,
             groundLayer
         );
 
@@ -128,27 +131,27 @@ public class PlayerMovement : MonoBehaviour
         {
             IsJumping = true;
             _isAttemptingToJump = false;
-            playerRigidbody2d.AddForceY(MOVEMENT_SPEED * 50);
+            _rb.AddForceY(movementSpeed * 50);
         }
     }
-
-    public void Knockback(Vector2 knockback)
-    {
-        _isKnockedBack = true;
-        playerRigidbody2d.AddForce(knockback, ForceMode2D.Impulse);
-        Invoke(nameof(EndKnockback), KNOCKBACK_DURATION_SECONDS);
-    }
-    private void EndKnockback() => _isKnockedBack = false;
 
     public void OnLevelFinish()
     {
         // HACK: since the celebration stance is standing, if
         // the hitbox is different than the standing one for whatever
         // reason it looks buggy. I have to find a better way to do this.
-        hitbox.size = standingHitboxSize;
-        hitbox.offset = standingHitboxOffset;
+        _hitbox.size = standingHitboxSize;
+        _hitbox.offset = standingHitboxOffset;
 
-        playerRigidbody2d.linearVelocityX = 0;
+        _rb.linearVelocityX = 0;
         enabled = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            _damageable.TakeDamage(maxPlayerHp);
+        }
     }
 }

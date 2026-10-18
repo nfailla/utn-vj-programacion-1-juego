@@ -1,23 +1,20 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class RedMob : MonoBehaviour
 {
-    private const string PLAYER_TAG = "Player"; // TODO: tag handle or whatever
-    
-    [SerializeField] private int damage = 20;
-    [SerializeField] private float knockbackMagnitude = 5f;
     [SerializeField] private float movementSpeed = 3f;
     [SerializeField] private float acceleration = 15f;
     [SerializeField] private float deceleration = 8f;
 
     [SerializeField] private PlayerDetector playerDetector;
 
+    private Rigidbody2D _rb;
     private GameObject _player;
-    private Rigidbody2D rb;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
@@ -62,25 +59,10 @@ public class RedMob : MonoBehaviour
 
         float accelerationRate = Mathf.Abs(targetSpeed) < 0.01f ? deceleration : acceleration;
 
-        rb.linearVelocityX = Mathf.MoveTowards(
-            rb.linearVelocityX,
+        _rb.linearVelocityX = Mathf.MoveTowards(
+            _rb.linearVelocityX,
             targetSpeed,
             accelerationRate * Time.fixedDeltaTime // this maxDelta is the maximum change for that given fixed interval
         );
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag(PLAYER_TAG))
-        {
-            Damageable damageablePlayer = collision.gameObject.GetComponent<Damageable>();
-            PlayerMovement playerMovement = damageablePlayer.GetComponent<PlayerMovement>();
-
-            float knockbackSign = Mathf.Sign(damageablePlayer.transform.position.x - transform.position.x);
-            Vector2 knockbackDirection = new Vector2(knockbackSign, 0.5f).normalized;
-
-            playerMovement.Knockback(knockbackDirection * knockbackMagnitude);
-            damageablePlayer.TakeDamage(damage);
-        }
     }
 }
