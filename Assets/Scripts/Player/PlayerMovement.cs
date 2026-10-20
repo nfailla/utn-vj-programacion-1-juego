@@ -120,4 +120,13 @@ public class PlayerMovement : MonoBehaviour
             _damageable.TakeDamage(maxPlayerHp);
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(
+            groundDetector.position,
+            groundDetectionRadius
+        );
+    }
 }
