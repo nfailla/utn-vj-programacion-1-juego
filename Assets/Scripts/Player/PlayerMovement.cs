@@ -20,23 +20,12 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Transform groundDetector;
     [SerializeField] private LayerMask groundLayer;
-    
-    [SerializeField] private Vector2 standingHitboxOffset;
-    [SerializeField] private Vector2 standingHitboxSize;
-    
-    [SerializeField] private Vector2 proneHitboxOffset;
-    [SerializeField] private Vector2 proneHitboxSize;
-
-    [SerializeField] private Vector2 jumpingHitboxOffset;
-    [SerializeField] private Vector2 jumpingHitboxSize;
-
     [SerializeField] private Vector3 standingBulletShellParticlesPosition;
     [SerializeField] private Vector3 proneBulletShellParticlesPosition;
     [SerializeField] private ParticleSystem bulletShellParticles;
 
     [SerializeField] private int maxPlayerHp = 1;
 
-    private BoxCollider2D _hitbox;
     private Rigidbody2D _rb;
 
     private float _horizontal;
@@ -56,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _damageable = GetComponent<Damageable>();
         _rb = GetComponent<Rigidbody2D>();
-        _hitbox = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -67,24 +55,8 @@ public class PlayerMovement : MonoBehaviour
         IsRunning = _horizontal != 0f;
         IsAimingUp = _vertical > 0f;
         IsAimingDown = _vertical < 0f;
-        
-        // TODO: a state machine would improve this code dramatically
 
         bool isProne = IsAimingDown && !IsRunning && !IsJumping;
-
-        // update hitbox
-        if (IsJumping)
-        {
-            // set hitbox for the player when jumping
-            _hitbox.size = jumpingHitboxSize;
-            _hitbox.offset = jumpingHitboxOffset;
-        }
-        else
-        {
-            // set hitbox for the player when standing or prone
-            _hitbox.size = isProne ? proneHitboxSize : standingHitboxSize;
-            _hitbox.offset = isProne ? proneHitboxOffset : standingHitboxOffset;
-        }
 
         // update position of the bullet shell particles...
         // but I wonder if it would be a better idea to have two particle systems
@@ -137,12 +109,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnLevelFinish()
     {
-        // HACK: since the celebration stance is standing, if
-        // the hitbox is different than the standing one for whatever
-        // reason it looks buggy. I have to find a better way to do this.
-        _hitbox.size = standingHitboxSize;
-        _hitbox.offset = standingHitboxOffset;
-
         _rb.linearVelocityX = 0;
         enabled = false;
     }

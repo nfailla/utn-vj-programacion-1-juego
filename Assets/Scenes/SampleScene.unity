@@ -8690,6 +8690,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 443415338033519586, guid: ff1a5c999c2a123489e1268b99b01d90, type: 3}
+      propertyPath: proneHitboxSize.y
+      value: 0.224
+      objectReference: {fileID: 0}
+    - target: {fileID: 443415338033519586, guid: ff1a5c999c2a123489e1268b99b01d90, type: 3}
+      propertyPath: proneHitboxOffset.y
+      value: -0.112
+      objectReference: {fileID: 0}
+    - target: {fileID: 443415338033519586, guid: ff1a5c999c2a123489e1268b99b01d90, type: 3}
+      propertyPath: standingHitboxSize.y
+      value: 0.448
+      objectReference: {fileID: 0}
     - target: {fileID: 1256155187204361987, guid: ff1a5c999c2a123489e1268b99b01d90, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.05
