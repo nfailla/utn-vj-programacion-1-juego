@@ -529,7 +529,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   - m_Name: isAimingUp
     m_Type: 4
@@ -1092,13 +1092,13 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 3706474015404270611}
-    m_Position: {x: 300, y: 160, z: 0}
+    m_Position: {x: 240, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6815581530526971488}
     m_Position: {x: 980, y: -160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5601934276047240064}
-    m_Position: {x: 880, y: 250, z: 0}
+    m_Position: {x: 230, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6308450189962989933}
     m_Position: {x: 580, y: 10, z: 0}
@@ -1124,7 +1124,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 1410, y: 30, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 3706474015404270611}
+  m_DefaultState: {fileID: -5601934276047240064}
 --- !u!1101 &6704614624376586142
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

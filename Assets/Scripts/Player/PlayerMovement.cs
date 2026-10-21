@@ -47,8 +47,14 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        IsJumping = true;
+    }
+
     private void Update()
     {
+        Debug.Log("IsJumping: " + IsJumping);
         _horizontal = Input.GetAxisRaw("Horizontal"); // TODO: unhardcode
         _vertical = Input.GetAxisRaw("Vertical"); // TODO: unhardcode
 
