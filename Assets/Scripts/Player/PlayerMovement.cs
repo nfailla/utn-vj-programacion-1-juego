@@ -49,12 +49,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        // The player always spawn and respawn in the air
         IsJumping = true;
     }
 
     private void Update()
     {
-        Debug.Log("IsJumping: " + IsJumping);
         _horizontal = Input.GetAxisRaw("Horizontal"); // TODO: unhardcode
         _vertical = Input.GetAxisRaw("Vertical"); // TODO: unhardcode
 
