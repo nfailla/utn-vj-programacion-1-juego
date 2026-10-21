@@ -124,8 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee532599f69e0b4e9eb35735dc42a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy1
-  damage: 20
-  knockbackMagnitude: 5
   movementSpeed: 3
   acceleration: 15
   deceleration: 8
@@ -293,10 +291,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6457089286434454562, guid: 7f4164cd1d9d4b6479a5c1bfb8dd5eb4, type: 3}
-      propertyPath: enemyBehaviorScript
-      value: 
-      objectReference: {fileID: 2458169550530877474}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

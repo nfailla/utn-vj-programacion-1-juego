@@ -1,6 +1,8 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
+
 public class RedMob : MonoBehaviour
 {
     private static readonly int IsWalkingHash = Animator.StringToHash("isWalking");
