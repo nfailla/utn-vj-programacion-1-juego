@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerGun : MonoBehaviour
 {
     private const string ENEMY_TAG = "Enemy"; // TODO: tag handle or whatever
@@ -17,8 +18,7 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private float reloadingDuration = 2f; // duration of a full gun reload
     [SerializeField] private float cooldownDuration = .2f; // time between one bullet firing and the next one
 
-    private PlayerMovement movement;
-
+    private PlayerMovement _movement;
 
     private int _clip;
 
@@ -27,7 +27,7 @@ public class PlayerGun : MonoBehaviour
 
     private void Awake()
     {
-        movement = GetComponent<PlayerMovement>();
+        _movement = GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -38,7 +38,7 @@ public class PlayerGun : MonoBehaviour
     void Update()
     {
         // TODO: unhardcode the input keys
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && _clip != MAX_CLIP_SIZE)
         {
             StartReloading();
             return;
@@ -54,7 +54,7 @@ public class PlayerGun : MonoBehaviour
     {
         if (IsReloading() || IsCoolingDown()) return;
 
-        Transform firePoint = movement.AimingDirection switch {
+        Transform firePoint = _movement.AimingDirection switch {
             PlayerMovement.AimDirection.Straight =>     firePointStraight,
             PlayerMovement.AimDirection.StraightUp =>   firePointStraightUp,
             PlayerMovement.AimDirection.StraightDown => firePointStraightDown,
