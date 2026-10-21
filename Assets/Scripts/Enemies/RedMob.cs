@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class RedMob : MonoBehaviour
 {
+    private static readonly int IsWalkingHash = Animator.StringToHash("isWalking");
+
     [SerializeField] private float movementSpeed = 3f;
     [SerializeField] private float acceleration = 15f;
     [SerializeField] private float deceleration = 8f;
@@ -10,11 +12,13 @@ public class RedMob : MonoBehaviour
     [SerializeField] private PlayerDetector playerDetector;
 
     private Rigidbody2D _rb;
+    private Animator _animator;
     private GameObject _player;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -31,6 +35,7 @@ public class RedMob : MonoBehaviour
 
     private void HandlePlayerDetected(GameObject player)
     {
+        _animator.SetBool(IsWalkingHash, true);
         _player = player;
     }
 
@@ -44,7 +49,10 @@ public class RedMob : MonoBehaviour
      */
     private void FollowPlayer()
     {
-        if (_player == null) return;
+        if (_player == null) {
+            _animator.SetBool(IsWalkingHash, false);
+            return;
+        }
 
         // the target position is the player's horizontal position.
         // We don't want the enemy to try to reach the player vertically by
