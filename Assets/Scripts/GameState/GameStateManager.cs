@@ -15,22 +15,14 @@ public class GameStateManager : MonoBehaviour
 
     [SerializeField] private float timeToRespawn;
 
-    // TODO:
-    // 1. Subscribe to Player. When it dies:
-    //   - If there are lives left, respawn in respawn point (ref to it) and subtract to the remaining lives
-    //   - If there are no lives left, show GAME OVER after .5f sec.
-    // 2. Know the player gun's bullets
-    // 3. Know if the player gun is reloading
-
     public event Action<GameObject> OnPlayerRespawn;
     public event Action<int> OnLivesRemainingChanged;
     public event Action<int, int> OnAmmoChanged;
     public event Action<bool> OnReloading;
+    public event Action OnGameOver;
 
-    // General game state
     private int _livesRemaining = 2;
 
-    // Internal state
     private bool _respawnRequested;
     private float _respawnTime;
 
@@ -93,7 +85,7 @@ public class GameStateManager : MonoBehaviour
         }
         else
         {
-            // TODO: Game Over
+            OnGameOver?.Invoke();
         }
     }
 

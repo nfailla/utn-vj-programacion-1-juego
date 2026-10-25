@@ -16,6 +16,7 @@ public class HUDController : MonoBehaviour
         gameStateManager.OnLivesRemainingChanged += SetLivesRemaining;
         gameStateManager.OnAmmoChanged += SetAmmo;
         gameStateManager.OnReloading += SetReloading;
+        gameStateManager.OnGameOver += HandleGameOver;
 
         pauseManager.OnPause += HandlePause;
     }
@@ -25,6 +26,7 @@ public class HUDController : MonoBehaviour
         gameStateManager.OnLivesRemainingChanged -= SetLivesRemaining;
         gameStateManager.OnAmmoChanged -= SetAmmo;
         gameStateManager.OnReloading -= SetReloading;
+        gameStateManager.OnGameOver -= HandleGameOver;
 
         pauseManager.OnPause -= HandlePause;
     }
@@ -47,5 +49,10 @@ public class HUDController : MonoBehaviour
     private void HandlePause(bool pause)
     {
         pauseMenuHint.SetActive(!pause); // hide pause hint if pause menu is open
+    }
+
+    private void HandleGameOver()
+    {
+        livesRemainingText.text = "GAME OVER";
     }
 }

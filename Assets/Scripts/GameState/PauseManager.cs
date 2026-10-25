@@ -9,13 +9,21 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField] private string mainMenuSceneName = "MainMenu";
 
+    [SerializeField] private GameStateManager gameStateManager;
+
     [SerializeField] private GameObject pauseMenuCanvas;
-    [SerializeField] private GameObject hudCanvas;
+
+    [SerializeField] private GameObject gameOverMenuCanvas;
+
+    [SerializeField] private float gameOverDelay = 4f;
 
     public static PauseManager Instance { get; private set; }
     public bool IsPaused { get; private set; }
 
     public event Action<bool> OnPause;
+
+    private bool _pauseAfterGameOverRequested;
+    private float _pauseAfterGameOverEndTime;
 
     private void Awake()
     {
@@ -30,9 +38,30 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = TIME_SCALE_GAME_RUNNING;
     }
 
+    private void OnEnable()
+    {
+        gameStateManager.OnGameOver += HandleGameOver;
+    }
+
+    private void OnDisable()
+    {
+        gameStateManager.OnGameOver -= HandleGameOver;
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (_pauseAfterGameOverRequested && Time.time > _pauseAfterGameOverEndTime)
+        {
+            if (gameOverMenuCanvas.activeInHierarchy)
+            {
+                return; // Nothing else to do once the game is over and the game over menu is open!
+            }
+
+            Time.timeScale = TIME_SCALE_GAME_PAUSED;
+            gameOverMenuCanvas.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P)) // TODO: unhardcode
         {
             if (IsPaused)
             {
@@ -71,5 +100,12 @@ public class PauseManager : MonoBehaviour
     public void BackToMainMenu()
     {
         SceneManager.LoadScene(mainMenuSceneName);
+    }
+
+    public void HandleGameOver()
+    {
+        // Once the game is over, pause the game after a moment and prevent the player to pause
+        _pauseAfterGameOverEndTime = Time.time + gameOverDelay;
+        _pauseAfterGameOverRequested = true;
     }
 }
