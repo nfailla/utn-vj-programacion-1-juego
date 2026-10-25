@@ -52,13 +52,14 @@ public class PlayerGun : MonoBehaviour
         }
 
         // TODO: unhardcode the input keys
-        if (Input.GetKeyDown(KeyCode.R) && _clip != MaxClipSize)
+        if (Input.GetButton("Reload") && _clip != MaxClipSize)
         {
             StartReloading();
             return;
         }
 
-        if (Input.GetKey(KeyCode.J))
+        // TODO: unhardcode the input keys
+        if (Input.GetButton("Shoot"))
         {
             Shoot();
         }

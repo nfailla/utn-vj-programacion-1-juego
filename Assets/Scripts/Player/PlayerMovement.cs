@@ -82,7 +82,10 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, yRotationDeg, 0f);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        if (
+            Input.GetButtonDown("Jump") // TODO: unhardcode
+            && _isGrounded
+            )
         {
             _isAttemptingToJump = true;
         }
@@ -111,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         {
             IsJumping = true;
             _isAttemptingToJump = false;
-            _rb.AddForceY(movementSpeed * 50);
+            _rb.AddForceY(movementSpeed * 50); // TODO: unhardcode
         }
     }
 
@@ -123,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy")) // TODO: unhardcode
         {
             _damageable.TakeDamage(maxPlayerHp);
         }
