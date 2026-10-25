@@ -20,6 +20,7 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private float cooldownDuration = .2f; // time between one bullet firing and the next one
 
     public event Action<int, int> OnAmmoChanged;
+    public event Action<bool> OnReloading;
 
     private PlayerMovement _movement;
 
@@ -44,6 +45,7 @@ public class PlayerGun : MonoBehaviour
         if (_isReloading && ReloadingTimeElapsed())
         {
             _isReloading = false;
+            OnReloading?.Invoke(_isReloading);
             OnAmmoChanged?.Invoke(_clip, MAX_CLIP_SIZE);
         }
 
@@ -99,6 +101,7 @@ public class PlayerGun : MonoBehaviour
     private void StartReloading()
     {
         _isReloading = true;
+        OnReloading?.Invoke(_isReloading);
 
         _reloadingEndTime = Time.time + reloadingDuration;
         _clip = MAX_CLIP_SIZE;

@@ -24,7 +24,8 @@ public class GameStateManager : MonoBehaviour
 
     public event Action<GameObject> OnPlayerRespawn;
     public event Action<int> OnLivesRemainingChanged;
-    public event Action<int, int> OnAmmoChanged; // TODO
+    public event Action<int, int> OnAmmoChanged;
+    public event Action<bool> OnReloading;
 
     // General game state
     private int _livesRemaining = 2;
@@ -37,12 +38,14 @@ public class GameStateManager : MonoBehaviour
     {
         playerDamageable.OnPlayerDied += HandlePlayerDied;
         playerGun.OnAmmoChanged += HandleAmmoChanged;
+        playerGun.OnReloading += HandleReloading;
     }
 
     private void OnDisable()
     {
         playerDamageable.OnPlayerDied -= HandlePlayerDied;
         playerGun.OnAmmoChanged -= HandleAmmoChanged;
+        playerGun.OnReloading -= HandleReloading;
     }
 
     private void Update()
@@ -90,5 +93,10 @@ public class GameStateManager : MonoBehaviour
     private void HandleAmmoChanged(int current, int max)
     {
         OnAmmoChanged?.Invoke(current, max);
+    }
+
+    private void HandleReloading(bool isReloading)
+    {
+        OnReloading?.Invoke(isReloading);
     }
 }

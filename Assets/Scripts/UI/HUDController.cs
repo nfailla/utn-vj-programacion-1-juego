@@ -7,17 +7,20 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private TMP_Text livesRemainingText;
     [SerializeField] private TMP_Text ammoText;
+    [SerializeField] private GameObject reloadingText;
 
     private void OnEnable()
     {
         gameStateManager.OnLivesRemainingChanged += SetLivesRemaining;
         gameStateManager.OnAmmoChanged += SetAmmo;
+        gameStateManager.OnReloading += SetReloading;
     }
 
     private void OnDisable()
     {
         gameStateManager.OnLivesRemainingChanged -= SetLivesRemaining;
         gameStateManager.OnAmmoChanged -= SetAmmo;
+        gameStateManager.OnReloading -= SetReloading;
     }
 
     private void SetLivesRemaining(int lives)
@@ -30,8 +33,8 @@ public class HUDController : MonoBehaviour
         ammoText.text = $"AMMO {current} / {max}";
     }
 
-    //private void SetReloading(bool reloading)
-    //{
-
-    //}
+    private void SetReloading(bool reloading)
+    {
+        reloadingText.SetActive(reloading);
+    }
 }
