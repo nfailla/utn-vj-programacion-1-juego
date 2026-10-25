@@ -8,12 +8,16 @@ public class GameStateManager : MonoBehaviour
     // and exposes the public API of the player to this manager
     [SerializeField] private PlayerGun playerGun;
     [SerializeField] private Damageable playerDamageable;
-
+    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerAnimation playerAnimation;
+    
     [SerializeField] private GameObject playerPrefab;
 
     [SerializeField] private GameObject playerRespawnPoint;
 
     [SerializeField] private float timeToRespawn;
+
+    [SerializeField] private LevelFinish levelFinish; // TODO: not a good name
 
     public event Action<GameObject> OnPlayerRespawn;
     public event Action<int> OnLivesRemainingChanged;
@@ -31,6 +35,8 @@ public class GameStateManager : MonoBehaviour
         playerDamageable.OnPlayerDied += HandlePlayerDied;
         playerGun.OnAmmoChanged += HandleAmmoChanged;
         playerGun.OnReloading += HandleReloading;
+
+        levelFinish.OnVictory += HandleVictory;
     }
 
     private void OnDisable()
@@ -38,6 +44,8 @@ public class GameStateManager : MonoBehaviour
         playerDamageable.OnPlayerDied -= HandlePlayerDied;
         playerGun.OnAmmoChanged -= HandleAmmoChanged;
         playerGun.OnReloading -= HandleReloading;
+
+        levelFinish.OnVictory -= HandleVictory;
     }
 
     private void Update()
@@ -59,8 +67,10 @@ public class GameStateManager : MonoBehaviour
         GameObject instantiatedPlayer = Instantiate(playerPrefab, playerRespawnPoint.transform.position, Quaternion.identity);
         OnPlayerRespawn?.Invoke(instantiatedPlayer);
 
+        playerMovement = instantiatedPlayer.GetComponent<PlayerMovement>();
         playerGun = instantiatedPlayer.GetComponent<PlayerGun>();
         playerDamageable = instantiatedPlayer.GetComponent<Damageable>();
+        playerAnimation = instantiatedPlayer.GetComponent<PlayerAnimation>();
         
         playerDamageable.OnPlayerDied += HandlePlayerDied;
         playerGun.OnAmmoChanged += HandleAmmoChanged;
@@ -97,5 +107,15 @@ public class GameStateManager : MonoBehaviour
     private void HandleReloading(bool isReloading)
     {
         OnReloading?.Invoke(isReloading);
+    }
+
+    private void HandleVictory()
+    {
+        // TODO: destroy all enemies!!!!!
+
+        playerMovement.OnLevelFinish();
+        playerGun.OnLevelFinish();
+        playerDamageable.OnLevelFinish();
+        playerAnimation.OnLevelFinish();
     }
 }
