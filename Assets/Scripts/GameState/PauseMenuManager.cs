@@ -6,6 +6,8 @@ public class PauseManager : MonoBehaviour
     private const float TIME_SCALE_GAME_RUNNING = 1f;
     private const float TIME_SCALE_GAME_PAUSED = 0f;
 
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
+
     [SerializeField] private GameObject pauseMenuCanvas;
     [SerializeField] private GameObject hudCanvas;
 
@@ -57,5 +59,10 @@ public class PauseManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 }
