@@ -71,6 +71,11 @@ public class GameStateManager : MonoBehaviour
         playerDamageable = instantiatedPlayer.GetComponent<Damageable>();
         
         playerDamageable.OnPlayerDied += HandlePlayerDied;
+        playerGun.OnAmmoChanged += HandleAmmoChanged;
+        playerGun.OnReloading += HandleReloading;
+
+        // Restart ammo indicator
+        OnAmmoChanged?.Invoke(playerGun.MaxClipSize, playerGun.MaxClipSize);
     }
 
     private void HandlePlayerDied()
@@ -83,6 +88,8 @@ public class GameStateManager : MonoBehaviour
             _respawnTime = Time.time + timeToRespawn;
 
             playerDamageable.OnPlayerDied -= HandlePlayerDied;
+
+            OnReloading?.Invoke(false); // The reloading indicator must disappear when the player is loading
         }
         else
         {

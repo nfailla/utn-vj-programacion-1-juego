@@ -4,8 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerGun : MonoBehaviour
 {
-    private const string ENEMY_TAG = "Enemy"; // TODO: tag handle or whatever
-    [SerializeField] private const int MAX_CLIP_SIZE = 20; // TODO: unhardcode
+    [SerializeField] private string enemyTag = "Enemy";
+    public int MaxClipSize { get; private set; } = 20;
 
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform firePointStraight;
@@ -37,7 +37,7 @@ public class PlayerGun : MonoBehaviour
 
     private void Start()
     {
-        _clip = MAX_CLIP_SIZE;
+        _clip = MaxClipSize;
     }
 
     void Update()
@@ -46,11 +46,11 @@ public class PlayerGun : MonoBehaviour
         {
             _isReloading = false;
             OnReloading?.Invoke(_isReloading);
-            OnAmmoChanged?.Invoke(_clip, MAX_CLIP_SIZE);
+            OnAmmoChanged?.Invoke(_clip, MaxClipSize);
         }
 
         // TODO: unhardcode the input keys
-        if (Input.GetKeyDown(KeyCode.R) && _clip != MAX_CLIP_SIZE)
+        if (Input.GetKeyDown(KeyCode.R) && _clip != MaxClipSize)
         {
             StartReloading();
             return;
@@ -77,12 +77,12 @@ public class PlayerGun : MonoBehaviour
 
         Vector2 bulletDirection = firePoint.right; // always to the right relative to the firePoint. Each firePoint is rotated accordingly
 
-        Bullet.Spawn(bulletPrefab, ENEMY_TAG, firePoint.position, bulletDirection);
+        Bullet.Spawn(bulletPrefab, enemyTag, firePoint.position, bulletDirection);
         bulletShellParticles.Emit(1);
 
         _clip--;
 
-        OnAmmoChanged?.Invoke(_clip, MAX_CLIP_SIZE);
+        OnAmmoChanged?.Invoke(_clip, MaxClipSize);
 
         if (_clip < 1)
         {
@@ -104,7 +104,7 @@ public class PlayerGun : MonoBehaviour
         OnReloading?.Invoke(_isReloading);
 
         _reloadingEndTime = Time.time + reloadingDuration;
-        _clip = MAX_CLIP_SIZE;
+        _clip = MaxClipSize;
     }
 
     private void StartCooldown()
