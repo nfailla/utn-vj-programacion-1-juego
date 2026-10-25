@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerAnimation : MonoBehaviour
 {
     private static readonly int IsCelebratingHash = Animator.StringToHash("isCelebrating");

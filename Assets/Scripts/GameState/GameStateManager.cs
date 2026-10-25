@@ -24,6 +24,7 @@ public class GameStateManager : MonoBehaviour
     public event Action<int, int> OnAmmoChanged;
     public event Action<bool> OnReloading;
     public event Action OnGameOver;
+    public event Action OnVictory;
 
     private int _livesRemaining = 2;
 
@@ -36,7 +37,7 @@ public class GameStateManager : MonoBehaviour
         playerGun.OnAmmoChanged += HandleAmmoChanged;
         playerGun.OnReloading += HandleReloading;
 
-        levelFinish.OnVictory += HandleVictory;
+        levelFinish.OnReached += HandleLevelFinishReached;
     }
 
     private void OnDisable()
@@ -45,7 +46,7 @@ public class GameStateManager : MonoBehaviour
         playerGun.OnAmmoChanged -= HandleAmmoChanged;
         playerGun.OnReloading -= HandleReloading;
 
-        levelFinish.OnVictory -= HandleVictory;
+        levelFinish.OnReached -= HandleLevelFinishReached;
     }
 
     private void Update()
@@ -109,13 +110,17 @@ public class GameStateManager : MonoBehaviour
         OnReloading?.Invoke(isReloading);
     }
 
-    private void HandleVictory()
+    private void HandleLevelFinishReached()
     {
         // TODO: destroy all enemies!!!!!
 
+        // TODO: Probably having a singletone for the game state manager would be better
+        // so the player subscribes itself to the victory event and handles this
         playerMovement.OnLevelFinish();
         playerGun.OnLevelFinish();
         playerDamageable.OnLevelFinish();
         playerAnimation.OnLevelFinish();
+
+        OnVictory?.Invoke();
     }
 }

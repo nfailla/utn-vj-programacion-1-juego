@@ -2315,7 +2315,9 @@ MonoBehaviour:
   gameStateManager: {fileID: 909185392}
   pauseMenuCanvas: {fileID: 1599444617}
   gameOverMenuCanvas: {fileID: 408295145}
+  victoryMenuCanvas: {fileID: 558005279}
   gameOverDelay: 2
+  victoryDelay: 4
 --- !u!1 &372250222
 GameObject:
   m_ObjectHideFlags: 0

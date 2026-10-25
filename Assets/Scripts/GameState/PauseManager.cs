@@ -12,18 +12,22 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameStateManager gameStateManager;
 
     [SerializeField] private GameObject pauseMenuCanvas;
-
     [SerializeField] private GameObject gameOverMenuCanvas;
+    [SerializeField] private GameObject victoryMenuCanvas;
 
     [SerializeField] private float gameOverDelay = 4f;
+    [SerializeField] private float victoryDelay = 4f;
 
     public static PauseManager Instance { get; private set; }
     public bool IsPaused { get; private set; }
 
     public event Action<bool> OnPause;
 
-    private bool _pauseAfterGameOverRequested;
-    private float _pauseAfterGameOverEndTime;
+    private bool _gameOverMenuOpenRequested;
+    private float _gameOverMenuOpenTime;
+
+    private bool _victoryMenuOpenRequested;
+    private float _victoryMenuOpenTime;
 
     private void Awake()
     {
@@ -41,16 +45,32 @@ public class PauseManager : MonoBehaviour
     private void OnEnable()
     {
         gameStateManager.OnGameOver += HandleGameOver;
+        gameStateManager.OnVictory += HandleVictory;
     }
 
     private void OnDisable()
     {
         gameStateManager.OnGameOver -= HandleGameOver;
+        gameStateManager.OnVictory -= HandleVictory;
     }
 
     private void Update()
     {
-        if (_pauseAfterGameOverRequested && Time.time > _pauseAfterGameOverEndTime)
+        // Victory
+        if (_victoryMenuOpenRequested && Time.time > _victoryMenuOpenTime)
+        {
+            if (victoryMenuCanvas.activeInHierarchy)
+            {
+                return; // Nothing else to do once the player won and the victory menu is open!
+            }
+
+            Time.timeScale = TIME_SCALE_GAME_PAUSED;
+            victoryMenuCanvas.SetActive(true);
+        }
+
+
+        // Game Over
+        if (_gameOverMenuOpenRequested && Time.time > _gameOverMenuOpenTime)
         {
             if (gameOverMenuCanvas.activeInHierarchy)
             {
@@ -61,6 +81,7 @@ public class PauseManager : MonoBehaviour
             gameOverMenuCanvas.SetActive(true);
         }
 
+        // Pause
         if (Input.GetKeyDown(KeyCode.P)) // TODO: unhardcode
         {
             if (IsPaused)
@@ -102,10 +123,15 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene(mainMenuSceneName);
     }
 
-    public void HandleGameOver()
+    private void HandleGameOver()
     {
-        // Once the game is over, pause the game after a moment and prevent the player to pause
-        _pauseAfterGameOverEndTime = Time.time + gameOverDelay;
-        _pauseAfterGameOverRequested = true;
+        _gameOverMenuOpenTime = Time.time + gameOverDelay;
+        _gameOverMenuOpenRequested = true;
+    }
+
+    private void HandleVictory()
+    {
+        _victoryMenuOpenTime = Time.time + victoryDelay;
+        _victoryMenuOpenRequested = true;
     }
 }
