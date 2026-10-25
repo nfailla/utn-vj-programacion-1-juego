@@ -19,6 +19,8 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Update()
     {
+        if (PauseManager.Instance.IsPaused) return;
+
         animator.SetBool(IsRunningHash, movement.IsRunning);
         animator.SetBool(IsJumpingHash, movement.IsJumping);
         // TODO: should these two have the vertical value instead

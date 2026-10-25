@@ -42,6 +42,8 @@ public class PlayerGun : MonoBehaviour
 
     void Update()
     {
+        if (PauseManager.Instance.IsPaused) return;
+
         if (_isReloading && ReloadingTimeElapsed())
         {
             _isReloading = false;

@@ -55,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (PauseManager.Instance.IsPaused) return;
+
         _horizontal = Input.GetAxisRaw("Horizontal"); // TODO: unhardcode
         _vertical = Input.GetAxisRaw("Vertical"); // TODO: unhardcode
 
