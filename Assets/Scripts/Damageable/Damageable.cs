@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Damageable : MonoBehaviour
 {
     [SerializeField] private int hitPoints = 100;
@@ -9,11 +10,11 @@ public class Damageable : MonoBehaviour
 
     public event Action OnPlayerDied;
 
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     public void TakeDamage(int amount, Vector2? knockback = null)
@@ -34,7 +35,7 @@ public class Damageable : MonoBehaviour
             hitFlashBehaviour.Flash();
         }
 
-        if (knockback != null) rb.AddForce(knockback.Value);
+        if (knockback != null) _rb.AddForce(knockback.Value);
     }
 
     public void OnLevelFinish()
