@@ -23,16 +23,27 @@ public class GameStateManager : MonoBehaviour
     // 3. Know if the player gun is reloading
 
     public event Action<GameObject> OnPlayerRespawn;
+    public event Action<int> OnLivesRemainingChanged;
+    public event Action<int, int> OnAmmoChanged; // TODO
 
     // General game state
-
+    private int _livesRemaining = 2;
 
     // Internal state
     private bool _respawnRequested;
     private float _respawnTime;
 
-    private void OnEnable() => playerDamageable.OnPlayerDied += HandlePlayerDied;
-    private void OnDisable() => playerDamageable.OnPlayerDied -= HandlePlayerDied;
+    private void OnEnable()
+    {
+        playerDamageable.OnPlayerDied += HandlePlayerDied;
+        playerGun.OnAmmoChanged += HandleAmmoChanged;
+    }
+
+    private void OnDisable()
+    {
+        playerDamageable.OnPlayerDied -= HandlePlayerDied;
+        playerGun.OnAmmoChanged -= HandleAmmoChanged;
+    }
 
     private void Update()
     {
@@ -44,6 +55,10 @@ public class GameStateManager : MonoBehaviour
 
     private void Respawn()
     {
+        // We call it here instead of calling it on HandlePlayerDied so lives
+        // don't go down immediately, which is less appealing
+        OnLivesRemainingChanged(_livesRemaining);
+
         _respawnRequested = false;
 
         GameObject instantiatedPlayer = Instantiate(playerPrefab, playerRespawnPoint.transform.position, Quaternion.identity);
@@ -51,13 +66,29 @@ public class GameStateManager : MonoBehaviour
 
         playerGun = instantiatedPlayer.GetComponent<PlayerGun>();
         playerDamageable = instantiatedPlayer.GetComponent<Damageable>();
+        
         playerDamageable.OnPlayerDied += HandlePlayerDied;
     }
 
     private void HandlePlayerDied()
     {
-        _respawnRequested = true;
-        _respawnTime = Time.time + timeToRespawn;
-        playerDamageable.OnPlayerDied -= HandlePlayerDied;
+        if (_livesRemaining > 0)
+        {
+            _livesRemaining--;
+
+            _respawnRequested = true;
+            _respawnTime = Time.time + timeToRespawn;
+
+            playerDamageable.OnPlayerDied -= HandlePlayerDied;
+        }
+        else
+        {
+            // TODO: Game Over
+        }
+    }
+
+    private void HandleAmmoChanged(int current, int max)
+    {
+        OnAmmoChanged?.Invoke(current, max);
     }
 }

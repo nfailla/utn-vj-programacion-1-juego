@@ -242,8 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31309ebd8af1394d89c09cd5b30f27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  livesRemainingText: {fileID: 0}
-  ammoText: {fileID: 0}
+  gameStateManager: {fileID: 909185392}
+  livesRemainingText: {fileID: 962934638}
+  ammoText: {fileID: 427657046}
 --- !u!1 &57162048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,7 +1419,7 @@ GameObject:
   - component: {fileID: 427657047}
   - component: {fileID: 427657046}
   m_Layer: 5
-  m_Name: CurrentAmmoText
+  m_Name: AmmoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2794,7 +2795,7 @@ GameObject:
   - component: {fileID: 962934639}
   - component: {fileID: 962934638}
   m_Layer: 5
-  m_Name: RemainingLivesText
+  m_Name: LivesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

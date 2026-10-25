@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -18,10 +19,13 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private float reloadingDuration = 2f; // duration of a full gun reload
     [SerializeField] private float cooldownDuration = .2f; // time between one bullet firing and the next one
 
+    public event Action<int, int> OnAmmoChanged;
+
     private PlayerMovement _movement;
 
     private int _clip;
 
+    private bool _reloading;
     private float _reloadingEndTime;
     private float _cooldownEndTime;
 
@@ -37,6 +41,12 @@ public class PlayerGun : MonoBehaviour
 
     void Update()
     {
+        if (_reloading && !IsReloading())
+        {
+            _reloading = false;
+            OnAmmoChanged?.Invoke(_clip, MAX_CLIP_SIZE);
+        }
+
         // TODO: unhardcode the input keys
         if (Input.GetKeyDown(KeyCode.R) && _clip != MAX_CLIP_SIZE)
         {
@@ -69,7 +79,9 @@ public class PlayerGun : MonoBehaviour
         Bullet.Spawn(bulletPrefab, ENEMY_TAG, firePoint.position, bulletDirection);
         bulletShellParticles.Emit(1);
 
-        _clip -= 1;
+        _clip--;
+
+        OnAmmoChanged?.Invoke(_clip, MAX_CLIP_SIZE);
 
         if (_clip < 1)
         {
@@ -94,6 +106,8 @@ public class PlayerGun : MonoBehaviour
 
     private void StartReloading()
     {
+        _reloading = true;
+
         _reloadingEndTime = Time.time + reloadingDuration;
         _clip = MAX_CLIP_SIZE;
     }
