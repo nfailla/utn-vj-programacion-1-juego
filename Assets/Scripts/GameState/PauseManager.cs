@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseMenuCanvas;
+    [SerializeField] private GameObject hudCanvas;
+
     public static PauseManager Instance { get; private set; }
     public bool IsPaused { get; private set; }
 
@@ -31,17 +34,17 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    void Pause()
+    public void Pause()
     {
         IsPaused = true;
         Time.timeScale = 0f;
-        // TODO: Show menu
+        pauseMenuCanvas.SetActive(true);
     }
 
-    void Resume()
+    public void Resume()
     {
         IsPaused = false;
         Time.timeScale = 1f;
-        // TODO: Hide menu
+        pauseMenuCanvas.SetActive(false);
     }
 }
