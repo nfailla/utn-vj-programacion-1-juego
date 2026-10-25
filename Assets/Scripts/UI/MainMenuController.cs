@@ -9,7 +9,7 @@ public class MainMenuController : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("Level_1");
+        SceneManager.LoadScene(initialSceneName);
     }
 
     public void ShowCredits()
