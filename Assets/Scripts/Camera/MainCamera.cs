@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MainCamera : MonoBehaviour
 {
+    [SerializeField] private GameStateManager gameStateManager;
+
     public Transform FollowTarget { get; set; }
 
     private float _minXPosition;
@@ -9,6 +11,14 @@ public class MainCamera : MonoBehaviour
     private void Awake()
     {
         FollowTarget = GameObject.Find("Player").transform; // TODO: it's too brittle
+    }
+
+    private void OnEnable() => gameStateManager.OnPlayerRespawn += HandlePlayerRespawn;
+    private void OnDisable() => gameStateManager.OnPlayerRespawn -= HandlePlayerRespawn;
+
+    private void HandlePlayerRespawn(GameObject player)
+    {
+        FollowTarget = player.transform;
     }
 
     private void Start()
