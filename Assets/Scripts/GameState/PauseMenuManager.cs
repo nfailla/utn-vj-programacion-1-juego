@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
+    private const float TIME_SCALE_GAME_RUNNING = 1f;
+    private const float TIME_SCALE_GAME_PAUSED = 0f;
+
     [SerializeField] private GameObject pauseMenuCanvas;
     [SerializeField] private GameObject hudCanvas;
 
@@ -17,6 +21,8 @@ public class PauseManager : MonoBehaviour
         }
 
         Instance = this;
+
+        Time.timeScale = TIME_SCALE_GAME_RUNNING;
     }
 
     private void Update()
@@ -37,14 +43,19 @@ public class PauseManager : MonoBehaviour
     public void Pause()
     {
         IsPaused = true;
-        Time.timeScale = 0f;
+        Time.timeScale = TIME_SCALE_GAME_PAUSED;
         pauseMenuCanvas.SetActive(true);
     }
 
     public void Resume()
     {
         IsPaused = false;
-        Time.timeScale = 1f;
+        Time.timeScale = TIME_SCALE_GAME_RUNNING;
         pauseMenuCanvas.SetActive(false);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
