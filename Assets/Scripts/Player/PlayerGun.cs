@@ -25,7 +25,7 @@ public class PlayerGun : MonoBehaviour
 
     private int _clip;
 
-    private bool _reloading;
+    private bool _isReloading;
     private float _reloadingEndTime;
     private float _cooldownEndTime;
 
@@ -41,9 +41,9 @@ public class PlayerGun : MonoBehaviour
 
     void Update()
     {
-        if (_reloading && !IsReloading())
+        if (_isReloading && ReloadingTimeElapsed())
         {
-            _reloading = false;
+            _isReloading = false;
             OnAmmoChanged?.Invoke(_clip, MAX_CLIP_SIZE);
         }
 
@@ -62,8 +62,7 @@ public class PlayerGun : MonoBehaviour
 
     void Shoot()
     {
-        if (IsReloading() || IsCoolingDown()) return;
-
+        if (_isReloading || IsCoolingDown()) return;
         Transform firePoint = _movement.AimingDirection switch {
             PlayerMovement.AimDirection.Straight =>     firePointStraight,
             PlayerMovement.AimDirection.StraightUp =>   firePointStraightUp,
@@ -94,19 +93,12 @@ public class PlayerGun : MonoBehaviour
         }
     }
 
-    private bool IsReloading()
-    {
-        return Time.time < _reloadingEndTime;
-    }
-
-    private bool IsCoolingDown()
-    {
-        return Time.time < _cooldownEndTime;
-    }
+    private bool ReloadingTimeElapsed() => Time.time >= _reloadingEndTime;
+    private bool IsCoolingDown() => Time.time < _cooldownEndTime;
 
     private void StartReloading()
     {
-        _reloading = true;
+        _isReloading = true;
 
         _reloadingEndTime = Time.time + reloadingDuration;
         _clip = MAX_CLIP_SIZE;
