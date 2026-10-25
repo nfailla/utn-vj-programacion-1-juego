@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,8 @@ public class PauseManager : MonoBehaviour
 
     public static PauseManager Instance { get; private set; }
     public bool IsPaused { get; private set; }
+
+    public event Action<bool> OnPause;
 
     private void Awake()
     {
@@ -46,6 +49,8 @@ public class PauseManager : MonoBehaviour
     {
         IsPaused = true;
         Time.timeScale = TIME_SCALE_GAME_PAUSED;
+        OnPause?.Invoke(IsPaused);
+
         pauseMenuCanvas.SetActive(true);
     }
 
@@ -53,6 +58,8 @@ public class PauseManager : MonoBehaviour
     {
         IsPaused = false;
         Time.timeScale = TIME_SCALE_GAME_RUNNING;
+        OnPause?.Invoke(IsPaused);
+
         pauseMenuCanvas.SetActive(false);
     }
 

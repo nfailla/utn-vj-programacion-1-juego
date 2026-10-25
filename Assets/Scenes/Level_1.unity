@@ -243,9 +243,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   gameStateManager: {fileID: 909185392}
+  pauseManager: {fileID: 362916855}
   livesRemainingText: {fileID: 962934638}
   ammoText: {fileID: 427657046}
   reloadingText: {fileID: 218726932}
+  pauseMenuHint: {fileID: 831407919}
 --- !u!1 &57162048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,7 +1361,7 @@ GameObject:
   - component: {fileID: 362916854}
   - component: {fileID: 362916855}
   m_Layer: 0
-  m_Name: PauseMenuManager
+  m_Name: PauseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
