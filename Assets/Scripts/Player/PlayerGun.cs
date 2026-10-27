@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerGun : MonoBehaviour
 {
     [SerializeField] private string enemyTag = "Enemy";
-    public int MaxClipSize { get; private set; } = 20;
+    public int MaxClipSize { get; private set; } = 30;
 
+    [SerializeField] private float knockbackMagnitude = 200f;
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform firePointStraight;
     [SerializeField] private Transform firePointStraightUp;
@@ -80,7 +81,7 @@ public class PlayerGun : MonoBehaviour
 
         Vector2 bulletDirection = firePoint.right; // always to the right relative to the firePoint. Each firePoint is rotated accordingly
 
-        Bullet.Spawn(bulletPrefab, enemyTag, firePoint.position, bulletDirection);
+        Bullet.Spawn(bulletPrefab, enemyTag, firePoint.position, bulletDirection, knockbackMagnitude);
         bulletShellParticles.Emit(1);
 
         _clip--;
