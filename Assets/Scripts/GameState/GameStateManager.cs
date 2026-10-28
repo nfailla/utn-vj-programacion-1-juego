@@ -19,6 +19,8 @@ public class GameStateManager : MonoBehaviour
 
     [SerializeField] private LevelFinish levelFinish; // TODO: not a good name
 
+    [SerializeField] private AudioClip respawnSFX;
+
     public event Action<GameObject> OnPlayerRespawn;
     public event Action<int> OnLivesRemainingChanged;
     public event Action<int, int> OnAmmoChanged;
@@ -66,6 +68,9 @@ public class GameStateManager : MonoBehaviour
         _respawnRequested = false;
 
         GameObject instantiatedPlayer = Instantiate(playerPrefab, playerRespawnPoint.transform.position, Quaternion.identity);
+
+        SFXManager.Instance.Play(respawnSFX);
+
         OnPlayerRespawn?.Invoke(instantiatedPlayer);
 
         playerMovement = instantiatedPlayer.GetComponent<PlayerMovement>();

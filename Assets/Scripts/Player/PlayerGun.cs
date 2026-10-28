@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -19,6 +20,12 @@ public class PlayerGun : MonoBehaviour
 
     [SerializeField] private float reloadingDuration = 2f; // duration of a full gun reload
     [SerializeField] private float cooldownDuration = .2f; // time between one bullet firing and the next one
+
+    [SerializeField] private AudioClip shootSfx;
+    [SerializeField] private float shootSfxPitchRangeFrom = 0.8f;
+    [SerializeField] private float shootSfxPitchRangeTo = 1.2f;
+
+    [SerializeField] private AudioClip[] reloadSFXs;
 
     public event Action<int, int> OnAmmoChanged;
     public event Action<bool> OnReloading;
@@ -50,6 +57,8 @@ public class PlayerGun : MonoBehaviour
             _isReloading = false;
             OnReloading?.Invoke(_isReloading);
             OnAmmoChanged?.Invoke(_clip, MaxClipSize);
+
+            SFXManager.Instance.Play(reloadSFXs.Last());
         }
 
         // TODO: unhardcode the input keys
@@ -88,6 +97,9 @@ public class PlayerGun : MonoBehaviour
 
         OnAmmoChanged?.Invoke(_clip, MaxClipSize);
 
+        float sfxPitch = UnityEngine.Random.Range(shootSfxPitchRangeFrom, shootSfxPitchRangeTo);
+        SFXManager.Instance.Play(shootSfx, sfxPitch);
+
         if (_clip < 1)
         {
             // TODO: autoreload, or indicate the player that they should reload (by a sound and a visual indicator)?????
@@ -104,6 +116,8 @@ public class PlayerGun : MonoBehaviour
 
     private void StartReloading()
     {
+        SFXManager.Instance.PlaySequentially(reloadSFXs.SkipLast(1).ToArray());
+
         _isReloading = true;
         OnReloading?.Invoke(_isReloading);
 

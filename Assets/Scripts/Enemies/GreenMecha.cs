@@ -15,6 +15,10 @@ public class GreenMecha : MonoBehaviour
 
     [SerializeField] private PlayerDetector playerDetector;
 
+    [SerializeField] private AudioClip shootSfx;
+    [SerializeField] private float shootSfxPitchRangeFrom = 0.8f;
+    [SerializeField] private float shootSfxPitchRangeTo = 1.2f;
+
     private GameObject _player;
     private Animator _animator;
 
@@ -87,6 +91,9 @@ public class GreenMecha : MonoBehaviour
     
     private void Shoot()
     {
+        float sfxPitch = Random.Range(shootSfxPitchRangeFrom, shootSfxPitchRangeTo);
+        SFXManager.Instance.Play(shootSfx, sfxPitch);
+
         _shootRequested = false;
         Bullet.Spawn(
             bulletPrefab,

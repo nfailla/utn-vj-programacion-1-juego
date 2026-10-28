@@ -295,6 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d687453a27c1c9145880d1121b59d5cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerGun
+  enemyTag: Enemy
+  knockbackMagnitude: 200
   bulletPrefab: {fileID: -7918116676575726711, guid: d8d72130b953c24499414691d70df796, type: 3}
   firePointStraight: {fileID: 960762878663558451}
   firePointStraightUp: {fileID: 7601247514867290590}
@@ -305,6 +307,13 @@ MonoBehaviour:
   bulletShellParticles: {fileID: 8715646833978837975}
   reloadingDuration: 2
   cooldownDuration: 0.2
+  shootSfx: {fileID: 8300000, guid: 2158f9ddd3965d24291912b40c08c995, type: 3}
+  shootSfxPitchRangeFrom: 0.8
+  shootSfxPitchRangeTo: 1.2
+  reloadSFXs:
+  - {fileID: 8300000, guid: e5ae8f421d5594b40bb44b0e51c2e405, type: 3}
+  - {fileID: 8300000, guid: 883f22550bcdeb54a81847a46ff3443e, type: 3}
+  - {fileID: 8300000, guid: d0c4777bdbf0ac948a1f00636249b23f, type: 3}
 --- !u!114 &4332814906092628798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +338,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975212b94b107814688c65de0838dad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  enemyHitSFX: []
+  enemyHitSfxPitchRangeFrom: 0.8
+  enemyHitSfxPitchRangeTo: 1.2
+  enemyDeathSFX: {fileID: 0}
+  playerDeathSFX: {fileID: 8300000, guid: f9dac275e9b879c43a709bc15e6e0a66, type: 3}
+  playerTag: Player
   hitPoints: 1
   particlesPrefab: {fileID: 6823744223716954244, guid: 58994baa96846904c80bd7c596745fc6, type: 3}
   hitFlashBehaviour: {fileID: 0}
