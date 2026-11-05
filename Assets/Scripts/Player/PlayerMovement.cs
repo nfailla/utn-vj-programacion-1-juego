@@ -15,8 +15,13 @@ public class PlayerMovement : MonoBehaviour
         Prone,
     }
 
-    [SerializeField] private const float groundDetectionRadius = .2f;
-    [SerializeField] private const float movementSpeed = 5f;
+
+    [SerializeField] private float groundDetectionRadius = .2f;
+    [SerializeField] private float movementSpeed = 5f;
+
+    [SerializeField] private float jumpForce = 250f;
+
+    [SerializeField] private string enemyTag = "Enemy";
 
     [SerializeField] private Transform groundDetector;
     [SerializeField] private LayerMask groundLayer;
@@ -83,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (
-            Input.GetButtonDown("Jump") // TODO: unhardcode
+            Input.GetButtonDown("Jump")
             && _isGrounded
             )
         {
@@ -114,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
         {
             IsJumping = true;
             _isAttemptingToJump = false;
-            _rb.AddForceY(movementSpeed * 50); // TODO: unhardcode
+            _rb.AddForceY(jumpForce); // TODO: unhardcode
         }
     }
 
@@ -126,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")) // TODO: unhardcode
+        if (collision.gameObject.CompareTag(enemyTag))
         {
             _damageable.TakeDamage(maxPlayerHp);
         }
