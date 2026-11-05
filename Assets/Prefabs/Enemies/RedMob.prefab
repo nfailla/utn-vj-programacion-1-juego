@@ -224,12 +224,15 @@ MonoBehaviour:
   enemyHitSFX:
   - {fileID: 8300000, guid: 7dc4ade7df5bf3741b151cd7b18d1858, type: 3}
   - {fileID: 8300000, guid: 3e3adc8963ecb854290535fc9b2fb3a0, type: 3}
-  enemyDeathSFX: {fileID: 0}
+  enemyHitSfxPitchRangeFrom: 0.8
+  enemyHitSfxPitchRangeTo: 1.2
+  enemyDeathSFX: {fileID: 8300000, guid: 05e8492717f9bc943b484f1913eec4da, type: 3}
   playerDeathSFX: {fileID: 0}
   playerTag: Player
   hitPoints: 150
   particlesPrefab: {fileID: 6823744223716954244, guid: 0f03453a4e7ab0a4096b93e378bf8843, type: 3}
   hitFlashBehaviour: {fileID: 3292154295908192470}
+  explosionPrefab: {fileID: 1898392875220238741, guid: 99c8308a003f5c349815c8b489c42635, type: 3}
 --- !u!114 &3292154295908192470
 MonoBehaviour:
   m_ObjectHideFlags: 0

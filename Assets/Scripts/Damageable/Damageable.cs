@@ -15,6 +15,8 @@ public class Damageable : MonoBehaviour
     [SerializeField] private GameObject particlesPrefab;
     [SerializeField] private HitFlashBehaviour hitFlashBehaviour;
 
+    [SerializeField] private GameObject explosionPrefab;
+
     public event Action OnPlayerDied;
 
     private Rigidbody2D _rb;
@@ -31,6 +33,11 @@ public class Damageable : MonoBehaviour
         if (hitPoints <= 0)
         {
             Destroy(gameObject);
+
+            if (explosionPrefab != null)
+            {
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            }
 
             if (gameObject.CompareTag(playerTag))
             {

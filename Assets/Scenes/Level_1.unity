@@ -5552,6 +5552,7 @@ MonoBehaviour:
   timeToRespawn: 2
   levelFinish: {fileID: 1331195677}
   respawnSFX: {fileID: 8300000, guid: 169b6f81706388543bfb01142ca476a7, type: 3}
+  enemyTag: Enemy
 --- !u!1001 &922979060
 PrefabInstance:
   m_ObjectHideFlags: 0
