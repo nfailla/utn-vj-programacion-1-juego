@@ -49,7 +49,6 @@ public class Damageable : MonoBehaviour
             }
         }
 
-        // TODO: checking this once again is a bit silly
         if (!gameObject.CompareTag(playerTag))
         {
             float enemyHitSfxPitch = UnityEngine.Random.Range(enemyHitSfxPitchRangeFrom, enemyHitSfxPitchRangeTo);
