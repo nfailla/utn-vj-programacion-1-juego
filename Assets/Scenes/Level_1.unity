@@ -3418,6 +3418,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   gameStateManager: {fileID: 909185392}
+  playerTag: Player
+  cameraShakeOnPlayerDeathDuration: 0.5
+  cameraShakeOnPlayerDeathIntensity: 0.1
+  cameraShakeOnExplosionDuration: 0.1
+  cameraShakeOnExplosionIntensity: 0.1
 --- !u!114 &525114698 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4826031188181104804, guid: ff1a5c999c2a123489e1268b99b01d90, type: 3}
