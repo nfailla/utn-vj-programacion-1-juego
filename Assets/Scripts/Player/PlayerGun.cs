@@ -48,7 +48,7 @@ public class PlayerGun : MonoBehaviour
         _clip = MaxClipSize;
     }
 
-    void Update()
+    private void Update()
     {
         if (PauseManager.Instance.IsPaused) return;
 
@@ -61,21 +61,19 @@ public class PlayerGun : MonoBehaviour
             SFXManager.Instance.Play(reloadSFXs.Last());
         }
 
-        // TODO: unhardcode the input keys
         if (Input.GetButton("Reload") && _clip != MaxClipSize)
         {
             StartReloading();
             return;
         }
 
-        // TODO: unhardcode the input keys
         if (Input.GetButton("Shoot"))
         {
             Shoot();
         }
     }
 
-    void Shoot()
+    private void Shoot()
     {
         if (_isReloading || IsCoolingDown()) return;
         Transform firePoint = _movement.AimingDirection switch {
@@ -102,7 +100,6 @@ public class PlayerGun : MonoBehaviour
 
         if (_clip < 1)
         {
-            // TODO: autoreload, or indicate the player that they should reload (by a sound and a visual indicator)?????
             StartReloading();
         }
         else

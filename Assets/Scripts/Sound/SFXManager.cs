@@ -53,6 +53,5 @@ public class SFXManager : MonoBehaviour
 
             yield return new WaitForSecondsRealtime(clip.length);
         }
-
     }
 }
