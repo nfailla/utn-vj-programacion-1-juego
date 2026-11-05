@@ -21,6 +21,8 @@ public class GameStateManager : MonoBehaviour
 
     [SerializeField] private AudioClip respawnSFX;
 
+    [SerializeField] private string enemyTag = "Enemy";
+
     public event Action<GameObject> OnPlayerRespawn;
     public event Action<int> OnLivesRemainingChanged;
     public event Action<int, int> OnAmmoChanged;
@@ -117,7 +119,16 @@ public class GameStateManager : MonoBehaviour
 
     private void HandleLevelFinishReached()
     {
-        // TODO: destroy all enemies!!!!!
+        // destroy all enemies!!!!!
+        GameObject[] remainingEnemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        foreach (var remainingEnemy in remainingEnemies)
+        {
+            remainingEnemy.TryGetComponent(out Damageable enemyDamageable);
+            if(enemyDamageable != null)
+            {
+                enemyDamageable.TakeDamage(int.MaxValue); // Deal all the damage the bastard can take
+            }
+        }
 
         // TODO: Probably having a singletone for the game state manager would be better
         // so the player subscribes itself to the victory event and handles this
